@@ -1,0 +1,43 @@
+﻿@model GuzelRandevu.Models.Randevu
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h4>Randevu Oluştur</h4>
+
+<h5>Randevu</h5>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="musteriNoId" class="control-label"></label>
+                <input asp-for="musteriNoId" class="form-control" disabled /> @ViewBag.musteriId-@ViewBag.musteriAdi
+                <span asp-validation-for="musteriNoId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="merkezNoId" class="control-label"></label>
+                <input asp-for="merkezNoId" class="form-control" disabled /> @ViewBag.merkezId-@ViewBag.merkezAdi
+                <span asp-validation-for="merkezNoId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="randevuZamani" class="control-label"></label>
+                <input asp-for="randevuZamani" class="form-control" />
+                <span asp-validation-for="randevuZamani" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Güzellik Merkezlerine Dön</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
