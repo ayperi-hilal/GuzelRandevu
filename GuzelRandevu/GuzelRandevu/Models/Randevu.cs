@@ -8,13 +8,20 @@ namespace GuzelRandevu.Models
 {
     public class Randevu
     {
-        public int musteriNoId { get; set; }
+        public string musteriNoId { get; set; } //PK
         public Musteri musteri { get; set; }
-        public int merkezNoId { get; set; }
+        public int merkezNoId { get; set; } //PK
         public GuzellikMerkezi merkez { get; set; }
 
         [DataType(DataType.Date)]
-        public DateTime randevuZamani { get; set; }
+        [Display(Name ="Randevu Günü")]
+        public DateTime randevuGunu { get; set; }
+
+        [DataType(DataType.Time)]
+        [Display(Name = "Randevu Saati")]
+        public DateTime randevuSaati { get; set; }
+        [Display(Name = "Randevu Puanı")]
+
         public int randevuPuani { get; set; }
     }
 }

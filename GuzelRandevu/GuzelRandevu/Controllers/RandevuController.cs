@@ -7,19 +7,15 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GuzelRandevu.Data;
 using GuzelRandevu.Models;
-using Microsoft.AspNetCore.Authorization;
-using System.Security.Claims;
-using Microsoft.AspNetCore.Identity;
 
 namespace GuzelRandevu.Controllers
 {
     public class RandevuController : Controller
     {
         private readonly ApplicationDbContext _context;
-        private readonly UserManager<Musteri> _userManager;
-        public RandevuController(ApplicationDbContext context, UserManager<Musteri> userManager)
+
+        public RandevuController(ApplicationDbContext context)
         {
-            _userManager = userManager;
             _context = context;
         }
 
@@ -48,13 +44,8 @@ namespace GuzelRandevu.Controllers
         }
 
         // GET: Randevu/Create
-        [Authorize]
-        public IActionResult Create(int id,string name)
+        public IActionResult Create()
         {
-            ViewBag.musteriId = _userManager.GetUserId(HttpContext.User);
-            ViewBag.musteriAdi = _userManager.GetUserName(HttpContext.User);
-            ViewBag.merkezAdi = name;
-            ViewBag.merkezId = id;
             return View();
         }
 
@@ -63,7 +54,7 @@ namespace GuzelRandevu.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("musteriNoId,merkezNoId,randevuZamani,randevuPuani")] Randevu randevu)
+        public async Task<IActionResult> Create([Bind("musteriNoId,merkezNoId,randevuGunu,randevuSaati,randevuPuani")] Randevu randevu)
         {
             if (ModelState.IsValid)
             {
@@ -95,7 +86,7 @@ namespace GuzelRandevu.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("musteriNoId,merkezNoId,randevuZamani,randevuPuani")] Randevu randevu)
+        public async Task<IActionResult> Edit(int id, [Bind("musteriNoId,merkezNoId,randevuGunu,randevuSaati,randevuPuani")] Randevu randevu)
         {
             if (id != randevu.merkezNoId)
             {

@@ -21,7 +21,15 @@ namespace GuzelRandevu.Data
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Randevu>()
-                .HasKey(cs => new { cs.merkezNoId, cs.musteriNoId });
+        .HasKey(bc => new { bc.merkezNoId, bc.musteriNoId });
+            modelBuilder.Entity<Randevu>()
+                .HasOne(bc => bc.merkez)
+                .WithMany(b => b.randevular)
+                .HasForeignKey(bc => bc.merkezNoId);
+            modelBuilder.Entity<Randevu>()
+                .HasOne(bc => bc.musteri)
+                .WithMany(c => c.randevular)
+                .HasForeignKey(bc => bc.musteriNoId);
         }
     }
 }

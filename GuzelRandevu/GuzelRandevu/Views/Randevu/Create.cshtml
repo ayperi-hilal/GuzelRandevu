@@ -4,9 +4,9 @@
     ViewData["Title"] = "Create";
 }
 
-<h4>Randevu Oluştur</h4>
+<h1>Create</h1>
 
-<h5>Randevu</h5>
+<h4>Randevu</h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
@@ -14,18 +14,28 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label asp-for="musteriNoId" class="control-label"></label>
-                <input asp-for="musteriNoId" class="form-control" disabled /> @ViewBag.musteriId-@ViewBag.musteriAdi
+                <input asp-for="musteriNoId" class="form-control" />
                 <span asp-validation-for="musteriNoId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="merkezNoId" class="control-label"></label>
-                <input asp-for="merkezNoId" class="form-control" disabled /> @ViewBag.merkezId-@ViewBag.merkezAdi
+                <input asp-for="merkezNoId" class="form-control" />
                 <span asp-validation-for="merkezNoId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="randevuZamani" class="control-label"></label>
-                <input asp-for="randevuZamani" class="form-control" />
-                <span asp-validation-for="randevuZamani" class="text-danger"></span>
+                <label asp-for="randevuGunu" class="control-label"></label>
+                <input asp-for="randevuGunu" class="form-control" />
+                <span asp-validation-for="randevuGunu" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="randevuSaati" class="control-label"></label>
+                <input asp-for="randevuSaati" class="form-control" />
+                <span asp-validation-for="randevuSaati" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="randevuPuani" class="control-label"></label>
+                <input asp-for="randevuPuani" class="form-control" />
+                <span asp-validation-for="randevuPuani" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
@@ -35,7 +45,7 @@
 </div>
 
 <div>
-    <a asp-action="Index">Güzellik Merkezlerine Dön</a>
+    <a asp-action="Index">Back to List</a>
 </div>
 
 @section Scripts {

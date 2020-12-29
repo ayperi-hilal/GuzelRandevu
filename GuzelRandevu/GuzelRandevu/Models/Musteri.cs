@@ -9,10 +9,15 @@ namespace GuzelRandevu.Models
 {
     public class Musteri:IdentityUser
     {
+        [Display(Name = "Ad")]
         public string musteriAdi { get; set; }
+        [Display(Name = "Soyad")]
         public string musteriSoyadi { get; set; }
+        [Display(Name = "Tel No")]
         public int musteriTelNo { get; set; }
-        public List<Randevu> musteriRandevular { get; set; }
+        [Display(Name = "Cinsiyet")]
+        public Enumlar.Cinsiyet cinsiyet { get;set;}
+        public ICollection<Randevu> randevular { get; set; }
 
     }
 }

@@ -26,6 +26,9 @@ namespace GuzelRandevu.Data.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
+                    b.Property<int>("hizmetler")
+                        .HasColumnType("int");
+
                     b.Property<string>("merkezAdi")
                         .HasColumnType("nvarchar(max)");
 
@@ -98,6 +101,9 @@ namespace GuzelRandevu.Data.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
+                    b.Property<int>("cinsiyet")
+                        .HasColumnType("int");
+
                     b.Property<string>("musteriAdi")
                         .HasColumnType("nvarchar(max)");
 
@@ -125,26 +131,21 @@ namespace GuzelRandevu.Data.Migrations
                     b.Property<int>("merkezNoId")
                         .HasColumnType("int");
 
-                    b.Property<int>("musteriNoId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("merkezId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("musteriId")
+                    b.Property<string>("musteriNoId")
                         .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("randevuGunu")
+                        .HasColumnType("datetime2");
 
                     b.Property<int>("randevuPuani")
                         .HasColumnType("int");
 
-                    b.Property<DateTime>("randevuZamani")
+                    b.Property<DateTime>("randevuSaati")
                         .HasColumnType("datetime2");
 
                     b.HasKey("merkezNoId", "musteriNoId");
 
-                    b.HasIndex("merkezId");
-
-                    b.HasIndex("musteriId");
+                    b.HasIndex("musteriNoId");
 
                     b.ToTable("Randevu");
                 });
@@ -287,12 +288,16 @@ namespace GuzelRandevu.Data.Migrations
             modelBuilder.Entity("GuzelRandevu.Models.Randevu", b =>
                 {
                     b.HasOne("GuzelRandevu.Models.GuzellikMerkezi", "merkez")
-                        .WithMany("merkezRandevu")
-                        .HasForeignKey("merkezId");
+                        .WithMany("randevular")
+                        .HasForeignKey("merkezNoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("GuzelRandevu.Models.Musteri", "musteri")
-                        .WithMany("musteriRandevular")
-                        .HasForeignKey("musteriId");
+                        .WithMany("randevular")
+                        .HasForeignKey("musteriNoId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("merkez");
 
@@ -352,12 +357,12 @@ namespace GuzelRandevu.Data.Migrations
 
             modelBuilder.Entity("GuzelRandevu.Models.GuzellikMerkezi", b =>
                 {
-                    b.Navigation("merkezRandevu");
+                    b.Navigation("randevular");
                 });
 
             modelBuilder.Entity("GuzelRandevu.Models.Musteri", b =>
                 {
-                    b.Navigation("musteriRandevular");
+                    b.Navigation("randevular");
                 });
 #pragma warning restore 612, 618
         }

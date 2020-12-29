@@ -7815,25 +7815,20 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\lenovo\\.nuget\\packages\\": {},
-    "C:\\Microsoft\\Xamarin\\NuGet\\": {}
+    "C:\\Users\\Yıldız\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\lenovo\\source\\repos\\GuzelRandevu\\GuzelRandevu\\GuzelRandevu.csproj",
+      "projectUniqueName": "C:\\Users\\Yıldız\\Downloads\\GuzelRandevu-master\\GuzelRandevu-master\\GuzelRandevu\\GuzelRandevu\\GuzelRandevu.csproj",
       "projectName": "GuzelRandevu",
-      "projectPath": "C:\\Users\\lenovo\\source\\repos\\GuzelRandevu\\GuzelRandevu\\GuzelRandevu.csproj",
-      "packagesPath": "C:\\Users\\lenovo\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\lenovo\\source\\repos\\GuzelRandevu\\GuzelRandevu\\obj\\",
+      "projectPath": "C:\\Users\\Yıldız\\Downloads\\GuzelRandevu-master\\GuzelRandevu-master\\GuzelRandevu\\GuzelRandevu\\GuzelRandevu.csproj",
+      "packagesPath": "C:\\Users\\Yıldız\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\Yıldız\\Downloads\\GuzelRandevu-master\\GuzelRandevu-master\\GuzelRandevu\\GuzelRandevu\\obj\\",
       "projectStyle": "PackageReference",
-      "fallbackFolders": [
-        "C:\\Microsoft\\Xamarin\\NuGet\\"
-      ],
       "configFilePaths": [
-        "C:\\Users\\lenovo\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+        "C:\\Users\\Yıldız\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
       "originalTargetFrameworks": [
         "net5.0"

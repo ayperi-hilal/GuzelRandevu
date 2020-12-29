@@ -10,15 +10,17 @@ namespace GuzelRandevu.Models
     {
         [Key]
         public int merkezId { get; set; }
-        [Display(Name= "Merkez Adı")]
+        [Display(Name= "Adı")]
         public string merkezAdi { get; set; }
-        [Display(Name = "Merkez Email")]
+        [Display(Name = "Email Adresi")]
         public string merkezEmail { get; set; }
-        [Display(Name = "Merkez Adresi")]
+        [Display(Name = "Adresi")]
         public string merkezAdres { get; set; }
-        [Display(Name = "Merkez Tel No")]
+        [Display(Name = "Tel No")]
         public string merkezTelNo { get; set; }
         public string merkezResimUrl { get; set; }
-        public List<Randevu> merkezRandevu { get; set; }
+        [Display(Name = "Hizmetler")]
+        public Enumlar.Hizmetler hizmetler { get; set; }
+        public ICollection<Randevu> randevular { get; set; }
     }
 }
