@@ -1,0 +1,53 @@
+﻿@model GuzelRandevu.Models.GuzellikMerkezi
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>GuzellikMerkezi</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="merkezAdi" class="control-label"></label>
+                <input asp-for="merkezAdi" class="form-control" />
+                <span asp-validation-for="merkezAdi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="merkezEmail" class="control-label"></label>
+                <input asp-for="merkezEmail" class="form-control" />
+                <span asp-validation-for="merkezEmail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="merkezAdres" class="control-label"></label>
+                <input asp-for="merkezAdres" class="form-control" />
+                <span asp-validation-for="merkezAdres" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="merkezTelNo" class="control-label"></label>
+                <input asp-for="merkezTelNo" class="form-control" />
+                <span asp-validation-for="merkezTelNo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="merkezResimUrl" class="control-label"></label>
+                <input asp-for="merkezResimUrl" class="form-control" />
+                <span asp-validation-for="merkezResimUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
