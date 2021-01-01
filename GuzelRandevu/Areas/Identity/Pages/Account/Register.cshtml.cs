@@ -20,21 +20,24 @@ namespace GuzelRandevu.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class RegisterModel : PageModel
     {
-        private readonly SignInManager<Musteri> _signInManager;
-        private readonly UserManager<Musteri> _userManager;
+        private readonly SignInManager<Uye> _signInManager;
+        private readonly UserManager<Uye> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
+        private readonly RoleManager<IdentityRole> _roleManager;
 
         public RegisterModel(
-            UserManager<Musteri> userManager,
-            SignInManager<Musteri> signInManager,
+            UserManager<Uye> userManager,
+            SignInManager<Uye> signInManager,
             ILogger<RegisterModel> logger,
-            IEmailSender emailSender)
+            IEmailSender emailSender,
+            RoleManager<IdentityRole> roleManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _logger = logger;
             _emailSender = emailSender;
+            _roleManager = roleManager;
         }
 
         [BindProperty]
@@ -43,32 +46,66 @@ namespace GuzelRandevu.Areas.Identity.Pages.Account
         public string ReturnUrl { get; set; }
 
         public IList<AuthenticationScheme> ExternalLogins { get; set; }
+        public async Task createRolesandUsers()
+        {
+            bool x = await _roleManager.RoleExistsAsync("Admin");
+            if (!x)
+            {
+                // first we create Admin rol    
+                var role = new IdentityRole();
+                role.Name = "Admin";
+                await _roleManager.CreateAsync(role);
+
+                //Here we create a Admin super user who will maintain the website                   
+
+                var user = new Uye();
+                user.UserName = "b191210310@sakarya.edu.tr";
+                user.Email = "b191210310@sakarya.edu.tr";
+
+                string userPWD = "123";
+
+                IdentityResult chkUser = await _userManager.CreateAsync(user, userPWD);
+
+                //Add default User to Role Admin    
+                if (chkUser.Succeeded)
+                {
+                    var result1 = await _userManager.AddToRoleAsync(user, "Admin");
+                }
+            }
+
+            // creating Creating Manager role     
+            x = await _roleManager.RoleExistsAsync("Müşteri");
+            if (!x)
+            {
+                var role = new IdentityRole();
+                role.Name = "Müşteri";
+                await _roleManager.CreateAsync(role);
+            }
+        }
 
         public class InputModel
         {
-            //<partial name = "_StatusMessage" model="Model.StatusMessage" />
             [Required]
-            [Display(Name = "Adınız:")]
+            [Display(Name = "Adınız")]
             public string ad { get; set; }
-
             [Required]
-            [Display(Name = "Soyadınız:")]
+            [Display(Name = "Soyadınız")]
             public string soyad { get; set; }
 
             [Required]
             [EmailAddress]
-            [Display(Name = "Email Adresiniz:")]
+            [Display(Name = "Email adresiniz")]
             public string Email { get; set; }
 
             [Required]
-            [StringLength(100, ErrorMessage = "{0} en az {2} en fazla {1} karakter uzunluğunda olmalı.", MinimumLength = 6)]
+            [StringLength(5, ErrorMessage = "{0} en az {2} en fazla {1} uzunluğunda olmalıdır.", MinimumLength = 3)]
             [DataType(DataType.Password)]
-            [Display(Name = "Şifreniz:")]
+            [Display(Name = "Şifre")]
             public string Password { get; set; }
 
             [DataType(DataType.Password)]
-            [Display(Name = "Tekrar Şifreniz:")]
-            [Compare("Password", ErrorMessage = "Şifreler eşleşmiyor.")]
+            [Display(Name = "Tekrar şifre")]
+            [Compare("Password", ErrorMessage = "İki şifre birbirinin aynısı değil.")]
             public string ConfirmPassword { get; set; }
         }
 
@@ -77,18 +114,19 @@ namespace GuzelRandevu.Areas.Identity.Pages.Account
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
         }
-
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-                var user = new Musteri { musteriAdi = Input.ad, musteriSoyadi = Input.soyad,UserName = Input.Email, Email = Input.Email };
+                var user = new Uye { uyeAdi=Input.ad,uyeSoyadi=Input.soyad,UserName = Input.Email, Email = Input.Email };
                 var result = await _userManager.CreateAsync(user, Input.Password);
                 if (result.Succeeded)
                 {
-                    _logger.LogInformation("Kullanıcı yeni hesap oluşturdu.");
+                    await createRolesandUsers();
+                     await _userManager.AddToRoleAsync(user, "Müşteri");
+                    _logger.LogInformation("User created a new account with password.");
 
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     code = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(code));

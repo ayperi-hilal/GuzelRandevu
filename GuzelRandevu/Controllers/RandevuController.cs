@@ -22,11 +22,12 @@ namespace GuzelRandevu.Controllers
         // GET: Randevu
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Randevu.ToListAsync());
+            var applicationDbContext = _context.Randevu.Include(r => r.guzellikMerkezi).Include(r => r.uye);
+            return View(await applicationDbContext.ToListAsync());
         }
 
         // GET: Randevu/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(string id)
         {
             if (id == null)
             {
@@ -34,7 +35,9 @@ namespace GuzelRandevu.Controllers
             }
 
             var randevu = await _context.Randevu
-                .FirstOrDefaultAsync(m => m.merkezNoId == id);
+                .Include(r => r.guzellikMerkezi)
+                .Include(r => r.uye)
+                .FirstOrDefaultAsync(m => m.merkezId == id);
             if (randevu == null)
             {
                 return NotFound();
@@ -46,6 +49,8 @@ namespace GuzelRandevu.Controllers
         // GET: Randevu/Create
         public IActionResult Create()
         {
+            ViewData["merkezId"] = new SelectList(_context.GuzellikMerkezi, "merkezId", "merkezId");
+            ViewData["uyeId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
 
@@ -54,7 +59,7 @@ namespace GuzelRandevu.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("musteriNoId,merkezNoId,randevuGunu,randevuSaati,randevuPuani")] Randevu randevu)
+        public async Task<IActionResult> Create([Bind("uyeId,merkezId,randevuDegerlendirmesi,randevuPuani,randevuSaati,randevuTuru")] Randevu randevu)
         {
             if (ModelState.IsValid)
             {
@@ -62,11 +67,13 @@ namespace GuzelRandevu.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["merkezId"] = new SelectList(_context.GuzellikMerkezi, "merkezId", "merkezId", randevu.merkezId);
+            ViewData["uyeId"] = new SelectList(_context.Users, "Id", "Id", randevu.uyeId);
             return View(randevu);
         }
 
         // GET: Randevu/Edit/5
-        public async Task<IActionResult> Edit(int? id)
+        public async Task<IActionResult> Edit(string id)
         {
             if (id == null)
             {
@@ -78,6 +85,8 @@ namespace GuzelRandevu.Controllers
             {
                 return NotFound();
             }
+            ViewData["merkezId"] = new SelectList(_context.GuzellikMerkezi, "merkezId", "merkezId", randevu.merkezId);
+            ViewData["uyeId"] = new SelectList(_context.Users, "Id", "Id", randevu.uyeId);
             return View(randevu);
         }
 
@@ -86,9 +95,9 @@ namespace GuzelRandevu.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("musteriNoId,merkezNoId,randevuGunu,randevuSaati,randevuPuani")] Randevu randevu)
+        public async Task<IActionResult> Edit(string id, [Bind("uyeId,merkezId,randevuDegerlendirmesi,randevuPuani,randevuSaati,randevuTuru")] Randevu randevu)
         {
-            if (id != randevu.merkezNoId)
+            if (id != randevu.merkezId)
             {
                 return NotFound();
             }
@@ -102,7 +111,7 @@ namespace GuzelRandevu.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!RandevuExists(randevu.merkezNoId))
+                    if (!RandevuExists(randevu.merkezId))
                     {
                         return NotFound();
                     }
@@ -113,11 +122,13 @@ namespace GuzelRandevu.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["merkezId"] = new SelectList(_context.GuzellikMerkezi, "merkezId", "merkezId", randevu.merkezId);
+            ViewData["uyeId"] = new SelectList(_context.Users, "Id", "Id", randevu.uyeId);
             return View(randevu);
         }
 
         // GET: Randevu/Delete/5
-        public async Task<IActionResult> Delete(int? id)
+        public async Task<IActionResult> Delete(string id)
         {
             if (id == null)
             {
@@ -125,7 +136,9 @@ namespace GuzelRandevu.Controllers
             }
 
             var randevu = await _context.Randevu
-                .FirstOrDefaultAsync(m => m.merkezNoId == id);
+                .Include(r => r.guzellikMerkezi)
+                .Include(r => r.uye)
+                .FirstOrDefaultAsync(m => m.merkezId == id);
             if (randevu == null)
             {
                 return NotFound();
@@ -137,7 +150,7 @@ namespace GuzelRandevu.Controllers
         // POST: Randevu/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(string id)
         {
             var randevu = await _context.Randevu.FindAsync(id);
             _context.Randevu.Remove(randevu);
@@ -145,9 +158,9 @@ namespace GuzelRandevu.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private bool RandevuExists(int id)
+        private bool RandevuExists(string id)
         {
-            return _context.Randevu.Any(e => e.merkezNoId == id);
+            return _context.Randevu.Any(e => e.merkezId == id);
         }
     }
 }

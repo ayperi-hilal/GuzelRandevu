@@ -21,27 +21,19 @@ namespace GuzelRandevu.Data.Migrations
 
             modelBuilder.Entity("GuzelRandevu.Models.GuzellikMerkezi", b =>
                 {
-                    b.Property<int>("merkezId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<int>("hizmetler")
-                        .HasColumnType("int");
+                    b.Property<string>("merkezId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("merkezAdi")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("merkezAdres")
+                    b.Property<string>("merkezAdresi")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("merkezEmail")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("merkezResimUrl")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("merkezTelNo")
+                    b.Property<string>("merkezResim")
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("merkezId");
@@ -49,7 +41,34 @@ namespace GuzelRandevu.Data.Migrations
                     b.ToTable("GuzellikMerkezi");
                 });
 
-            modelBuilder.Entity("GuzelRandevu.Models.Musteri", b =>
+            modelBuilder.Entity("GuzelRandevu.Models.Randevu", b =>
+                {
+                    b.Property<string>("merkezId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("uyeId")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("randevuDegerlendirmesi")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("randevuPuani")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("randevuSaati")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("randevuTuru")
+                        .HasColumnType("int");
+
+                    b.HasKey("merkezId", "uyeId");
+
+                    b.HasIndex("uyeId");
+
+                    b.ToTable("Randevu");
+                });
+
+            modelBuilder.Entity("GuzelRandevu.Models.Uye", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("nvarchar(450)");
@@ -101,17 +120,14 @@ namespace GuzelRandevu.Data.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
-                    b.Property<int>("cinsiyet")
-                        .HasColumnType("int");
-
-                    b.Property<string>("musteriAdi")
+                    b.Property<string>("musteriTelNo")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("musteriSoyadi")
+                    b.Property<string>("uyeAdi")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("musteriTelNo")
-                        .HasColumnType("int");
+                    b.Property<string>("uyeSoyadi")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -124,30 +140,6 @@ namespace GuzelRandevu.Data.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-                });
-
-            modelBuilder.Entity("GuzelRandevu.Models.Randevu", b =>
-                {
-                    b.Property<int>("merkezNoId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("musteriNoId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("randevuGunu")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("randevuPuani")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("randevuSaati")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("merkezNoId", "musteriNoId");
-
-                    b.HasIndex("musteriNoId");
-
-                    b.ToTable("Randevu");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -228,12 +220,10 @@ namespace GuzelRandevu.Data.Migrations
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderKey")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("ProviderDisplayName")
                         .HasColumnType("nvarchar(max)");
@@ -270,12 +260,10 @@ namespace GuzelRandevu.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("LoginProvider")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Name")
-                        .HasMaxLength(128)
-                        .HasColumnType("nvarchar(128)");
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Value")
                         .HasColumnType("nvarchar(max)");
@@ -287,21 +275,21 @@ namespace GuzelRandevu.Data.Migrations
 
             modelBuilder.Entity("GuzelRandevu.Models.Randevu", b =>
                 {
-                    b.HasOne("GuzelRandevu.Models.GuzellikMerkezi", "merkez")
+                    b.HasOne("GuzelRandevu.Models.GuzellikMerkezi", "guzellikMerkezi")
                         .WithMany("randevular")
-                        .HasForeignKey("merkezNoId")
+                        .HasForeignKey("merkezId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GuzelRandevu.Models.Musteri", "musteri")
+                    b.HasOne("GuzelRandevu.Models.Uye", "uye")
                         .WithMany("randevular")
-                        .HasForeignKey("musteriNoId")
+                        .HasForeignKey("uyeId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("merkez");
+                    b.Navigation("guzellikMerkezi");
 
-                    b.Navigation("musteri");
+                    b.Navigation("uye");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -315,7 +303,7 @@ namespace GuzelRandevu.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("GuzelRandevu.Models.Musteri", null)
+                    b.HasOne("GuzelRandevu.Models.Uye", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -324,7 +312,7 @@ namespace GuzelRandevu.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("GuzelRandevu.Models.Musteri", null)
+                    b.HasOne("GuzelRandevu.Models.Uye", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -339,7 +327,7 @@ namespace GuzelRandevu.Data.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("GuzelRandevu.Models.Musteri", null)
+                    b.HasOne("GuzelRandevu.Models.Uye", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -348,7 +336,7 @@ namespace GuzelRandevu.Data.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("GuzelRandevu.Models.Musteri", null)
+                    b.HasOne("GuzelRandevu.Models.Uye", null)
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -360,7 +348,7 @@ namespace GuzelRandevu.Data.Migrations
                     b.Navigation("randevular");
                 });
 
-            modelBuilder.Entity("GuzelRandevu.Models.Musteri", b =>
+            modelBuilder.Entity("GuzelRandevu.Models.Uye", b =>
                 {
                     b.Navigation("randevular");
                 });

@@ -12,12 +12,17 @@
     <div class="col-md-4">
         <form asp-action="Edit">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="musteriNoId" />
-            <input type="hidden" asp-for="merkezNoId" />
+            <input type="hidden" asp-for="uyeId" />
+            <input type="hidden" asp-for="merkezId" />
             <div class="form-group">
-                <label asp-for="randevuGunu" class="control-label"></label>
-                <input asp-for="randevuGunu" class="form-control" />
-                <span asp-validation-for="randevuGunu" class="text-danger"></span>
+                <label asp-for="randevuDegerlendirmesi" class="control-label"></label>
+                <textarea asp-for="randevuDegerlendirmesi" class="form-control"></textarea>
+                <span asp-validation-for="randevuDegerlendirmesi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="randevuPuani" class="control-label"></label>
+                <input asp-for="randevuPuani" class="form-control" />
+                <span asp-validation-for="randevuPuani" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="randevuSaati" class="control-label"></label>
@@ -25,9 +30,9 @@
                 <span asp-validation-for="randevuSaati" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="randevuPuani" class="control-label"></label>
-                <input asp-for="randevuPuani" class="form-control" />
-                <span asp-validation-for="randevuPuani" class="text-danger"></span>
+                <label asp-for="randevuTuru" class="control-label"></label>
+                <select asp-for="randevuTuru" class="form-control"></select>
+                <span asp-validation-for="randevuTuru" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
@@ -40,6 +45,3 @@
     <a asp-action="Index">Back to List</a>
 </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}

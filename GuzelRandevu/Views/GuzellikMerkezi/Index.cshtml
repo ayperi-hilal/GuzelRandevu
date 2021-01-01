@@ -1,13 +1,15 @@
 ﻿@model IEnumerable<GuzelRandevu.Models.GuzellikMerkezi>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Güzellik Merkezleri";
 }
 
-<h1>Güzellik Merkezleri</h1><br />
-@if (User.IsInRole("Admin")) { 
+<h5>Güzellik Merkezleri</h5>
+
+@if (User.IsInRole("Admin"))
+{
     <p>
-        <a asp-action="Create">Yeni Oluştur</a>
+        <a asp-controller="AdminPaneli" asp-action="Create">Yeni Merkez Ekle</a>
     </p>
 }
 <table class="table">
@@ -20,48 +22,46 @@
                 @Html.DisplayNameFor(model => model.merkezAdi)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.merkezAdresi)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.merkezEmail)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.merkezAdres)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.merkezTelNo)
-            </th>
+
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+        @foreach (var item in Model)
+        {
         <tr>
             <td>
-                <img src="@Html.DisplayFor(modelItem => item.merkezResimUrl)" />
+                <img src="@Html.DisplayFor(modelItem => item.merkezResim)" />
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.merkezAdi)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.merkezAdresi)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.merkezEmail)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.merkezAdres)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.merkezTelNo)
-            </td>
-
-            <td>
                 @if (User.IsInRole("Admin"))
                 {
-                    <a asp-action="Edit" asp-route-id="@item.merkezId">Düzenle |</a>
+                    <a asp-controller="AdminPaneli" asp-action="MerkezEdit" asp-route-id="@item.merkezId"> Düzenle  |</a>
+                    <a asp-controller="AdminPaneli" asp-action="MerkezDelete" asp-route-id="@item.merkezId">Sil |</a>
+                    <a asp-controller="AdminPaneli" asp-action="MerkezDetails" asp-route-id="@item.merkezId">Detaylar |</a>
+                    <a asp-controller="AdminPaneli" asp-action="RandevuCreate" >Randevu Oluştur</a>
                 }
-                <a asp-action="Details" asp-route-id="@item.merkezId">Randevu Al</a>
-                @if (User.IsInRole("Admin"))
+                else
                 {
-                    <a asp-action="Delete" asp-route-id="@item.merkezId">| Sil</a>
+                    <a asp-controller="Randevu" asp-action="Create">Randevu Al |</a>
+                    <a asp-action="Details" asp-route-id="@item.merkezId">Detaylar</a>
                 }
             </td>
         </tr>
-}
+        }
     </tbody>
 </table>

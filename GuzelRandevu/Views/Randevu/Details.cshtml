@@ -11,10 +11,28 @@
     <hr />
     <dl class="row">
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.randevuGunu)
+            @Html.DisplayNameFor(model => model.uye)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.randevuGunu)
+            @Html.DisplayFor(model => model.uye.Id)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.guzellikMerkezi)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.guzellikMerkezi.merkezId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.randevuDegerlendirmesi)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.randevuDegerlendirmesi)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.randevuPuani)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.randevuPuani)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.randevuSaati)
@@ -23,10 +41,10 @@
             @Html.DisplayFor(model => model.randevuSaati)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.randevuPuani)
+            @Html.DisplayNameFor(model => model.randevuTuru)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.randevuPuani)
+            @Html.DisplayFor(model => model.randevuTuru)
         </dd>
     </dl>
 </div>

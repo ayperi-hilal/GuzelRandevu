@@ -24,7 +24,7 @@ namespace GuzelRandevu
         }
 
         public IConfiguration Configuration { get; }
-
+        
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
@@ -33,14 +33,25 @@ namespace GuzelRandevu
                     Configuration.GetConnectionString("DefaultConnection")));
             services.AddDatabaseDeveloperPageExceptionFilter();
 
-            services.AddDefaultIdentity<Musteri>(options => options.SignIn.RequireConfirmedAccount = true)
+            services.AddIdentity<Uye, IdentityRole>()
+                .AddDefaultTokenProviders()
+                .AddDefaultUI()
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddControllersWithViews();
+
+            services.Configure<IdentityOptions>(options =>
+            {
+                options.Password.RequiredLength = 3;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
@@ -68,5 +79,6 @@ namespace GuzelRandevu
                 endpoints.MapRazorPages();
             });
         }
+
     }
 }

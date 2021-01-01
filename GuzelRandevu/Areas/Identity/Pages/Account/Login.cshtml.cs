@@ -18,13 +18,13 @@ namespace GuzelRandevu.Areas.Identity.Pages.Account
     [AllowAnonymous]
     public class LoginModel : PageModel
     {
-        private readonly UserManager<Musteri> _userManager;
-        private readonly SignInManager<Musteri> _signInManager;
+        private readonly UserManager<Uye> _userManager;
+        private readonly SignInManager<Uye> _signInManager;
         private readonly ILogger<LoginModel> _logger;
 
-        public LoginModel(SignInManager<Musteri> signInManager, 
+        public LoginModel(SignInManager<Uye> signInManager, 
             ILogger<LoginModel> logger,
-            UserManager<Musteri> userManager)
+            UserManager<Uye> userManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -45,13 +45,15 @@ namespace GuzelRandevu.Areas.Identity.Pages.Account
         {
             [Required]
             [EmailAddress]
+            [Display(Name ="Email adresiniz")]
             public string Email { get; set; }
 
             [Required]
             [DataType(DataType.Password)]
+            [Display(Name ="Şifreniz")]
             public string Password { get; set; }
 
-            [Display(Name = "Remember me?")]
+            [Display(Name = "Beni Hatırla")]
             public bool RememberMe { get; set; }
         }
 

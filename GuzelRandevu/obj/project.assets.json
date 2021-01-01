@@ -7820,11 +7820,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Yıldız\\Desktop\\Yeni klasör (3)\\GuzelRandevu\\GuzelRandevu\\GuzelRandevu.csproj",
+      "projectUniqueName": "C:\\Users\\Yıldız\\source\\repos\\GuzelRandevu\\GuzelRandevu\\GuzelRandevu.csproj",
       "projectName": "GuzelRandevu",
-      "projectPath": "C:\\Users\\Yıldız\\Desktop\\Yeni klasör (3)\\GuzelRandevu\\GuzelRandevu\\GuzelRandevu.csproj",
+      "projectPath": "C:\\Users\\Yıldız\\source\\repos\\GuzelRandevu\\GuzelRandevu\\GuzelRandevu.csproj",
       "packagesPath": "C:\\Users\\Yıldız\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Yıldız\\Desktop\\Yeni klasör (3)\\GuzelRandevu\\GuzelRandevu\\obj\\",
+      "outputPath": "C:\\Users\\Yıldız\\source\\repos\\GuzelRandevu\\GuzelRandevu\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Yıldız\\AppData\\Roaming\\NuGet\\NuGet.Config",

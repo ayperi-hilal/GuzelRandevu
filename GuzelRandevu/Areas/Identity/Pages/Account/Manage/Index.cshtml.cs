@@ -12,12 +12,12 @@ namespace GuzelRandevu.Areas.Identity.Pages.Account.Manage
 {
     public partial class IndexModel : PageModel
     {
-        private readonly UserManager<Musteri> _userManager;
-        private readonly SignInManager<Musteri> _signInManager;
+        private readonly UserManager<Uye> _userManager;
+        private readonly SignInManager<Uye> _signInManager;
 
         public IndexModel(
-            UserManager<Musteri> userManager,
-            SignInManager<Musteri> signInManager)
+            UserManager<Uye> userManager,
+            SignInManager<Uye> signInManager)
         {
             _userManager = userManager;
             _signInManager = signInManager;
@@ -34,14 +34,15 @@ namespace GuzelRandevu.Areas.Identity.Pages.Account.Manage
         public class InputModel
         {
             [Phone]
-            [Display(Name = "Telefon Numarası")]
+            [Display(Name = "Phone number")]
             public string PhoneNumber { get; set; }
         }
 
-        private async Task LoadAsync(Musteri user)
+        private async Task LoadAsync(Uye user)
         {
             var userName = await _userManager.GetUserNameAsync(user);
             var phoneNumber = await _userManager.GetPhoneNumberAsync(user);
+
             Username = userName;
 
             Input = new InputModel

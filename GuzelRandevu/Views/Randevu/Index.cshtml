@@ -13,13 +13,22 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.randevuGunu)
+                @Html.DisplayNameFor(model => model.uye)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.guzellikMerkezi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.randevuDegerlendirmesi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.randevuPuani)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.randevuSaati)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.randevuPuani)
+                @Html.DisplayNameFor(model => model.randevuTuru)
             </th>
             <th></th>
         </tr>
@@ -28,13 +37,22 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.randevuGunu)
+                @Html.DisplayFor(modelItem => item.uye.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.guzellikMerkezi.merkezId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.randevuDegerlendirmesi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.randevuPuani)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.randevuSaati)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.randevuPuani)
+                @Html.DisplayFor(modelItem => item.randevuTuru)
             </td>
             <td>
                 @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |

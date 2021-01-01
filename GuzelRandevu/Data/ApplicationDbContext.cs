@@ -7,29 +7,28 @@ using System.Text;
 
 namespace GuzelRandevu.Data
 {
-    public class ApplicationDbContext : IdentityDbContext<Musteri>
+    public class ApplicationDbContext : IdentityDbContext<Uye>
     {
         public DbSet<GuzellikMerkezi> GuzellikMerkezi { get; set; }
         public DbSet<Randevu> Randevu { get; set; }
-        
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-            : base(options)
-        {
 
-        }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
             modelBuilder.Entity<Randevu>()
-        .HasKey(bc => new { bc.merkezNoId, bc.musteriNoId });
+       .HasKey(r => new { r.merkezId, r.uyeId });
             modelBuilder.Entity<Randevu>()
-                .HasOne(bc => bc.merkez)
-                .WithMany(b => b.randevular)
-                .HasForeignKey(bc => bc.merkezNoId);
+                .HasOne(r => r.guzellikMerkezi)
+                .WithMany(g => g.randevular)
+                .HasForeignKey(r => r.merkezId);
             modelBuilder.Entity<Randevu>()
-                .HasOne(bc => bc.musteri)
-                .WithMany(c => c.randevular)
-                .HasForeignKey(bc => bc.musteriNoId);
+                .HasOne(r => r.uye)
+                .WithMany(u => u.randevular)
+                .HasForeignKey(r => r.uyeId);
+        }
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+            : base(options)
+        {
         }
     }
 }

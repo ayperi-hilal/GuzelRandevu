@@ -8,20 +8,43 @@ namespace GuzelRandevu.Models
 {
     public class Randevu
     {
-        public string musteriNoId { get; set; } //PK
-        public Musteri musteri { get; set; }
-        public int merkezNoId { get; set; } //PK
-        public GuzellikMerkezi merkez { get; set; }
+        public string uyeId { get; set; }
+        public Uye uye { get; set; }
+        public string merkezId { get; set; }
+        public GuzellikMerkezi guzellikMerkezi { get; set; }
 
-        [DataType(DataType.Date)]
-        [Display(Name ="Randevu Günü")]
-        public DateTime randevuGunu { get; set; }
-
-        [DataType(DataType.Time)]
-        [Display(Name = "Randevu Saati")]
-        public DateTime randevuSaati { get; set; }
-        [Display(Name = "Randevu Puanı")]
-
+        [Display(Name = "Değerlendirmeniz")]
+        [DataType(DataType.MultilineText)]
+        public string randevuDegerlendirmesi { get; set; }
+        [Display(Name = "Puanınız")]
         public int randevuPuani { get; set; }
+
+        [DataType(DataType.DateTime)]
+        [Display(Name = "Randevu Günü ve Saati")]
+        public DateTime randevuSaati { get; set; }
+        public enum randevuTipi 
+        {
+            [Display(Name = "Saç Boyama")]
+            sacBoyama,
+            [Display(Name = "Saç Bakımı")]
+            sacBakimi,
+            [Display(Name = "Saç Kesimi")]
+            sacKesimi,
+            [Display(Name = "Fön")]
+            fon,
+            [Display(Name = "Cilt Bakımı")]
+            ciltBakimi,
+            [Display(Name = "Makyaj")]
+            makyaj,
+            [Display(Name = "Masaj")]
+            masaj,
+            [Display(Name = "Manikür Pedikür")]
+            manikurPedikur,
+            [Display(Name = "Epilasyon")]
+            epilasyon,
+            [Display(Name = "Zayıflama")]
+            zayıflama
+        }
+        public randevuTipi randevuTuru { get; set; }
     }
 }

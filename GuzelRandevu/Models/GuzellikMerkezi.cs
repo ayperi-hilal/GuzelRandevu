@@ -9,18 +9,16 @@ namespace GuzelRandevu.Models
     public class GuzellikMerkezi
     {
         [Key]
-        public int merkezId { get; set; }
-        [Display(Name= "Adı")]
+        public string merkezId { get; set; }
+        [Display(Name = "Merkez Adı")]
         public string merkezAdi { get; set; }
-        [Display(Name = "Email Adresi")]
+        [Display(Name = "Merkez Adresi")]
+        public string merkezAdresi { get; set; }
+        [DataType(DataType.EmailAddress)]
+        [Display(Name = "Merkez Emaili")]
         public string merkezEmail { get; set; }
-        [Display(Name = "Adresi")]
-        public string merkezAdres { get; set; }
-        [Display(Name = "Tel No")]
-        public string merkezTelNo { get; set; }
-        public string merkezResimUrl { get; set; }
-        [Display(Name = "Hizmetler")]
-        public Enumlar.Hizmetler hizmetler { get; set; }
+        [DataType(DataType.ImageUrl)]
+        public string merkezResim { get; set; }
         public ICollection<Randevu> randevular { get; set; }
     }
 }
