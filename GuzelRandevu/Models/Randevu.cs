@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 
 namespace GuzelRandevu.Models
+
 {
     public class Randevu
     {
@@ -22,29 +23,32 @@ namespace GuzelRandevu.Models
         [DataType(DataType.DateTime)]
         [Display(Name = "Randevu Günü ve Saati")]
         public DateTime randevuSaati { get; set; }
-        public enum randevuTipi 
-        {
-            [Display(Name = "Saç Boyama")]
-            sacBoyama,
-            [Display(Name = "Saç Bakımı")]
-            sacBakimi,
-            [Display(Name = "Saç Kesimi")]
-            sacKesimi,
-            [Display(Name = "Fön")]
-            fon,
-            [Display(Name = "Cilt Bakımı")]
-            ciltBakimi,
-            [Display(Name = "Makyaj")]
-            makyaj,
-            [Display(Name = "Masaj")]
-            masaj,
-            [Display(Name = "Manikür Pedikür")]
-            manikurPedikur,
-            [Display(Name = "Epilasyon")]
-            epilasyon,
-            [Display(Name = "Zayıflama")]
-            zayıflama
-        }
+        [Display(Name = "Randevu Türü")]
         public randevuTipi randevuTuru { get; set; }
+        public enum randevuTipi
+    {
+        [Display(Name = "Saç Boyama")]
+        sacBoyama=0,
+        [Display(Name = "Saç Bakımı")]
+        sacBakimi=1,
+        [Display(Name = "Saç Kesimi")]
+        sacKesimi=2,
+        [Display(Name = "Fön")]
+        fon=3,
+        [Display(Name = "Cilt Bakımı")]
+        ciltBakimi=4,
+        [Display(Name = "Makyaj")]
+        makyaj=5,
+        [Display(Name = "Masaj")]
+        masaj=6,
+        [Display(Name = "Manikür Pedikür")]
+        manikurPedikur=7,
+        [Display(Name = "Epilasyon")]
+        epilasyon=8,
+        [Display(Name = "Zayıflama")]
+        zayıflama=9
+    }
+
+        
     }
 }

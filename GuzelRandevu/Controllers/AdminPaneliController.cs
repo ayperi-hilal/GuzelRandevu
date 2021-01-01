@@ -51,6 +51,7 @@ namespace GuzelRandevu.Controllers
             ViewData["uyeId"] = new SelectList(_context.Users, "Id", "Id");
             ViewData["merkezAdi"] = new SelectList(_context.GuzellikMerkezi, "merkezAdi", "merkezAdi");
             ViewData["uyeAdi"] = new SelectList(_context.Users, "uyeAdi", "uyeAdi");
+            //ViewBag.tur = Enum.GetValues(typeof(Randevu.randevuTipi)).Cast<Randevu.randevuTipi>();
             return View();
         }
 

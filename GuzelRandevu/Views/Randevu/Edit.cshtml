@@ -1,10 +1,10 @@
 ﻿@model GuzelRandevu.Models.Randevu
 
 @{
-    ViewData["Title"] = "Edit";
+    ViewData["Title"] = "Randevu Düzenle";
 }
 
-<h1>Edit</h1>
+<h5>Randevu Düzenle</h5>
 
 <h4>Randevu</h4>
 <hr />
@@ -35,13 +35,13 @@
                 <span asp-validation-for="randevuTuru" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Kaydet" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Randevu Listesine Geri Dön</a>
 </div>
 

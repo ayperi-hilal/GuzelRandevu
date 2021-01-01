@@ -1,10 +1,10 @@
 ﻿@model GuzelRandevu.Models.Randevu
 
 @{
-    ViewData["Title"] = "Details";
+    ViewData["Title"] = "Randevu Detayları";
 }
 
-<h1>Details</h1>
+<h5>Randevu Detayları</h5>
 
 <div>
     <h4>Randevu</h4>
@@ -49,6 +49,6 @@
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
-    <a asp-action="Index">Back to List</a>
+    @Html.ActionLink("Düzenle", "Edit", new { merkezId = Model.merkezId, uyeId = Model.uyeId }) |
+    <a asp-action="Index">Randevularımı Gör</a>
 </div>

@@ -7,18 +7,18 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GuzelRandevu.Data;
 using GuzelRandevu.Models;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 
 namespace GuzelRandevu.Controllers
 {
     public class RandevuController : Controller
     {
         private readonly ApplicationDbContext _context;
-
         public RandevuController(ApplicationDbContext context)
         {
             _context = context;
         }
-
         // GET: Randevu
         public async Task<IActionResult> Index()
         {
@@ -27,9 +27,9 @@ namespace GuzelRandevu.Controllers
         }
 
         // GET: Randevu/Details/5
-        public async Task<IActionResult> Details(string id)
+        public async Task<IActionResult> Details(string merkezId,string uyeId)
         {
-            if (id == null)
+            if (merkezId == null && uyeId==null)
             {
                 return NotFound();
             }
@@ -37,7 +37,7 @@ namespace GuzelRandevu.Controllers
             var randevu = await _context.Randevu
                 .Include(r => r.guzellikMerkezi)
                 .Include(r => r.uye)
-                .FirstOrDefaultAsync(m => m.merkezId == id);
+                .FirstOrDefaultAsync(m => m.merkezId == merkezId && m.uyeId==uyeId);
             if (randevu == null)
             {
                 return NotFound();
@@ -51,6 +51,11 @@ namespace GuzelRandevu.Controllers
         {
             ViewData["merkezId"] = new SelectList(_context.GuzellikMerkezi, "merkezId", "merkezId");
             ViewData["uyeId"] = new SelectList(_context.Users, "Id", "Id");
+            ViewData["Email"] = new SelectList(_context.Users, "Email", "Email");
+            ViewData["merkezAdi"] = new SelectList(_context.GuzellikMerkezi, "merkezAdi", "merkezAdi");
+            ViewData["uyeAdi"] = new SelectList(_context.Users, "uyeAdi", "uyeAdi");
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            ViewBag.userId = userId;
             return View();
         }
 
@@ -73,14 +78,14 @@ namespace GuzelRandevu.Controllers
         }
 
         // GET: Randevu/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        public async Task<IActionResult> Edit(string merkezId,string uyeId)
         {
-            if (id == null)
+            if (merkezId == null && uyeId==null)
             {
                 return NotFound();
             }
 
-            var randevu = await _context.Randevu.FindAsync(id);
+            var randevu = await _context.Randevu.FindAsync(merkezId,uyeId);
             if (randevu == null)
             {
                 return NotFound();
@@ -95,9 +100,9 @@ namespace GuzelRandevu.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("uyeId,merkezId,randevuDegerlendirmesi,randevuPuani,randevuSaati,randevuTuru")] Randevu randevu)
+        public async Task<IActionResult> Edit(string merkezId,string uyeId, [Bind("uyeId,merkezId,randevuDegerlendirmesi,randevuPuani,randevuSaati,randevuTuru")] Randevu randevu)
         {
-            if (id != randevu.merkezId)
+            if (merkezId != randevu.merkezId && uyeId!=randevu.uyeId)
             {
                 return NotFound();
             }
@@ -111,7 +116,7 @@ namespace GuzelRandevu.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!RandevuExists(randevu.merkezId))
+                    if (!RandevuExists(randevu.merkezId,randevu.uyeId))
                     {
                         return NotFound();
                     }
@@ -128,9 +133,9 @@ namespace GuzelRandevu.Controllers
         }
 
         // GET: Randevu/Delete/5
-        public async Task<IActionResult> Delete(string id)
+        public async Task<IActionResult> Delete(string merkezId,string uyeId)
         {
-            if (id == null)
+            if (merkezId == null&& uyeId==null)
             {
                 return NotFound();
             }
@@ -138,7 +143,7 @@ namespace GuzelRandevu.Controllers
             var randevu = await _context.Randevu
                 .Include(r => r.guzellikMerkezi)
                 .Include(r => r.uye)
-                .FirstOrDefaultAsync(m => m.merkezId == id);
+                .FirstOrDefaultAsync(m => m.merkezId == merkezId && m.uyeId==uyeId);
             if (randevu == null)
             {
                 return NotFound();
@@ -150,17 +155,17 @@ namespace GuzelRandevu.Controllers
         // POST: Randevu/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
+        public async Task<IActionResult> DeleteConfirmed(string merkezId,string uyeId)
         {
-            var randevu = await _context.Randevu.FindAsync(id);
+            var randevu = await _context.Randevu.FindAsync(merkezId,uyeId);
             _context.Randevu.Remove(randevu);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool RandevuExists(string id)
+        private bool RandevuExists(string merkezId,string uyeId)
         {
-            return _context.Randevu.Any(e => e.merkezId == id);
+            return _context.Randevu.Any(e => e.merkezId == merkezId && e.uyeId==uyeId);
         }
     }
 }

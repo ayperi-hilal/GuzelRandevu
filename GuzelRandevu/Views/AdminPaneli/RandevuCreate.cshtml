@@ -14,16 +14,16 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
                 <label class="control-label">Müşteri Adı</label>
-                <select asp-for="uyeId" class="form-control" asp-items="ViewBag.uyeAdi"></select>
+                <select asp-for="uyeId" class="form-control" asp-items="ViewBag.uyeId"></select>
             </div>
             <div class="form-group">
                 <label class="control-label">Güzellik Merkezi Adı</label>
-                <select asp-for="merkezId" class="form-control" asp-items="ViewBag.merkezAdi"></select>
+                <select asp-for="merkezId" class="form-control" asp-items="ViewBag.merkezId"></select>
             </div>
             <div class="form-group">
-                <label asp-for="randevuDegerlendirmesi" class="control-label"></label>
-                <textarea asp-for="randevuDegerlendirmesi" class="form-control"></textarea>
-                <span asp-validation-for="randevuDegerlendirmesi" class="text-danger"></span>
+                <label asp-for="randevuTuru" class="control-label"></label>
+                <select asp-for="randevuTuru" class="form-control" asp-items="@Html.GetEnumSelectList(typeof(Randevu.randevuTipi))"></select>
+                <span asp-validation-for="randevuTuru" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="randevuSaati" class="control-label"></label>

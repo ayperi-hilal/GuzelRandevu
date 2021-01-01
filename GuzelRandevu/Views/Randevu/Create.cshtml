@@ -1,34 +1,31 @@
 ﻿@model GuzelRandevu.Models.Randevu
 
 @{
-    ViewData["Title"] = "Create";
+    ViewData["Title"] = "Randevu Al";
 }
 
-<h1>Create</h1>
+<h5>Randevu Al</h5>
 
-<h4>Randevu</h4>
+<h4> </h4>
 <hr />
 <div class="row">
     <div class="col-md-4">
         <form asp-action="Create">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="uyeId" class="control-label"></label>
-                <select asp-for="uyeId" class ="form-control" asp-items="ViewBag.uyeId"></select>
+                <label class="control-label">Müşteri Adı</label>
+                <select asp-for="uyeId" class="form-control">
+                    <option>@ViewBag.userId</option>
+                </select> 
             </div>
             <div class="form-group">
-                <label asp-for="merkezId" class="control-label"></label>
-                <select asp-for="merkezId" class ="form-control" asp-items="ViewBag.merkezId"></select>
+                <label class="control-label">Güzellik Merkezi Adı</label>
+                <select asp-for="merkezId" class="form-control" asp-items="ViewBag.merkezId"></select>
             </div>
             <div class="form-group">
-                <label asp-for="randevuDegerlendirmesi" class="control-label"></label>
-                <textarea asp-for="randevuDegerlendirmesi" class="form-control"></textarea>
-                <span asp-validation-for="randevuDegerlendirmesi" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="randevuPuani" class="control-label"></label>
-                <input asp-for="randevuPuani" class="form-control" />
-                <span asp-validation-for="randevuPuani" class="text-danger"></span>
+                <label asp-for="randevuTuru" class="control-label"></label>
+                <select asp-for="randevuTuru" class="form-control" asp-items="@Html.GetEnumSelectList(typeof(Randevu.randevuTipi))"></select>
+                <span asp-validation-for="randevuTuru" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="randevuSaati" class="control-label"></label>
@@ -36,18 +33,16 @@
                 <span asp-validation-for="randevuSaati" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="randevuTuru" class="control-label"></label>
-                <select asp-for="randevuTuru" class="form-control"></select>
-                <span asp-validation-for="randevuTuru" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input type="submit" value="Oluştur" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Index">Randevularımı Gör</a>
 </div>
 
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

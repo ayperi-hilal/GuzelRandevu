@@ -1,22 +1,22 @@
 ﻿@model IEnumerable<GuzelRandevu.Models.Randevu>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Randevu Listesi";
 }
 
-<h1>Index</h1>
+<h1>Randevu Listesi</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create">Yeni Oluştur</a>
 </p>
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.uye)
+                Üye Adı Soyadı
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.guzellikMerkezi)
+                Güzellik Merkezi
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.randevuDegerlendirmesi)
@@ -37,17 +37,37 @@
 @foreach (var item in Model) {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.uye.Id)
+                @Html.DisplayFor(modelItem => item.uye.uyeAdi) @Html.DisplayFor(modelItem => item.uye.uyeSoyadi)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.guzellikMerkezi.merkezId)
+                @Html.DisplayFor(modelItem => item.guzellikMerkezi.merkezAdi)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.randevuDegerlendirmesi)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.randevuPuani)
-            </td>
+            @if (DateTime.Now.Date < item.randevuSaati)
+            {
+                <td>
+                    Gerçekleşmedi
+                </td>
+            }
+            else
+            {
+                <td>
+
+                    @Html.DisplayFor(modelItem => item.randevuDegerlendirmesi)
+                </td>
+            }
+            @if (DateTime.Now.Date < item.randevuSaati)
+            {
+                <td>
+                    Gerçekleşmedi
+                </td>
+            }
+            else
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.randevuPuani)
+                </td>
+
+            }
             <td>
                 @Html.DisplayFor(modelItem => item.randevuSaati)
             </td>
@@ -55,9 +75,9 @@
                 @Html.DisplayFor(modelItem => item.randevuTuru)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                @Html.ActionLink("Düzenle", "Edit", new { merkezId = item.merkezId, uyeId = item.uyeId }) |
+                @Html.ActionLink("Detaylar", "Details", new { merkezId = item.merkezId, uyeId = item.uyeId }) |
+                @Html.ActionLink("Sil", "Delete", new { merkezId = item.merkezId, uyeId = item.uyeId })
             </td>
         </tr>
 }

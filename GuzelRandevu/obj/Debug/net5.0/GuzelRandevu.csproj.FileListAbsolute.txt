@@ -191,7 +191,6 @@ C:\Users\Yıldız\source\repos\GuzelRandevu\GuzelRandevu\obj\Debug\net5.0\Razor\
 C:\Users\Yıldız\source\repos\GuzelRandevu\GuzelRandevu\obj\Debug\net5.0\Razor\Views\AdminPaneli\MerkezIndex.cshtml.g.cs
 C:\Users\Yıldız\source\repos\GuzelRandevu\GuzelRandevu\obj\Debug\net5.0\Razor\Views\GuzellikMerkezi\Details.cshtml.g.cs
 C:\Users\Yıldız\source\repos\GuzelRandevu\GuzelRandevu\obj\Debug\net5.0\Razor\Views\GuzellikMerkezi\Index.cshtml.g.cs
-C:\Users\Yıldız\source\repos\GuzelRandevu\GuzelRandevu\obj\Debug\net5.0\Razor\Areas\Identity\Pages\Account\Manage\Randevularim.cshtml.g.cs
 C:\Users\Yıldız\source\repos\GuzelRandevu\GuzelRandevu\obj\Debug\net5.0\Razor\Views\AdminPaneli\MerkezEdit.cshtml.g.cs
 C:\Users\Yıldız\source\repos\GuzelRandevu\GuzelRandevu\obj\Debug\net5.0\Razor\Views\AdminPaneli\RandevuIndex.cshtml.g.cs
 C:\Users\Yıldız\source\repos\GuzelRandevu\GuzelRandevu\obj\Debug\net5.0\Razor\Views\AdminPaneli\MerkezCreate.cshtml.g.cs
@@ -201,3 +200,8 @@ C:\Users\Yıldız\source\repos\GuzelRandevu\GuzelRandevu\obj\Debug\net5.0\Razor\
 C:\Users\Yıldız\source\repos\GuzelRandevu\GuzelRandevu\obj\Debug\net5.0\Razor\Views\AdminPaneli\RandevuDelete.cshtml.g.cs
 C:\Users\Yıldız\source\repos\GuzelRandevu\GuzelRandevu\obj\Debug\net5.0\Razor\Views\AdminPaneli\RandevuDetails.cshtml.g.cs
 C:\Users\Yıldız\source\repos\GuzelRandevu\GuzelRandevu\obj\Debug\net5.0\Razor\Views\AdminPaneli\RandevuEdit.cshtml.g.cs
+C:\Users\Yıldız\source\repos\GuzelRandevu\GuzelRandevu\obj\Debug\net5.0\Razor\Views\Randevu\Create.cshtml.g.cs
+C:\Users\Yıldız\source\repos\GuzelRandevu\GuzelRandevu\obj\Debug\net5.0\Razor\Views\Randevu\Delete.cshtml.g.cs
+C:\Users\Yıldız\source\repos\GuzelRandevu\GuzelRandevu\obj\Debug\net5.0\Razor\Views\Randevu\Details.cshtml.g.cs
+C:\Users\Yıldız\source\repos\GuzelRandevu\GuzelRandevu\obj\Debug\net5.0\Razor\Views\Randevu\Edit.cshtml.g.cs
+C:\Users\Yıldız\source\repos\GuzelRandevu\GuzelRandevu\obj\Debug\net5.0\Razor\Views\Randevu\Index.cshtml.g.cs

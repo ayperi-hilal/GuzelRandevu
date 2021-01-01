@@ -13,12 +13,12 @@
         <form asp-action="MerkezCreate">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label asp-for="merkezResim" class="control-label"></label>
-                <input type="image" asp-for="merkezResim" class="form-control" />
+                <label class="control-label">Güzellik Merkezi Resmi</label>
+                <input type="url" asp-for="merkezResim" class="form-control" />
                 <span asp-validation-for="merkezResim" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="merkezId" class="control-label"></label>
+                <label class="control-label"> Güzellik Merkezi ID</label>
                 <input asp-for="merkezId" class="form-control" />
                 <span asp-validation-for="merkezId" class="text-danger"></span>
             </div>
