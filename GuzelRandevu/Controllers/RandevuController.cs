@@ -15,9 +15,21 @@ namespace GuzelRandevu.Controllers
     public class RandevuController : Controller
     {
         private readonly ApplicationDbContext _context;
-        public RandevuController(ApplicationDbContext context)
+        private readonly UserManager<Uye> _userManager;
+        public Uye uye;
+        public RandevuController(ApplicationDbContext context, UserManager<Uye> userManager)
         {
+            _userManager = userManager;
             _context = context;
+        }
+        public async Task<IActionResult> Index2(string uyeId)
+        {
+            //var uye = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var randevu = await _context.Randevu
+                .Include(r => r.guzellikMerkezi)
+                .Include(r => r.uye)
+                .FirstOrDefaultAsync(a => a.uyeId == uyeId);
+            return View(randevu);
         }
         // GET: Randevu
         public async Task<IActionResult> Index()
