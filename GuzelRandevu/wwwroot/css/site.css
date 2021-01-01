@@ -69,3 +69,121 @@ body {
   white-space: nowrap;
   line-height: 60px; /* Vertically center the text there */
 }
+/*animasyon için olan kısım*/
+    .aw-slider {
+        width: 800px;
+        height: 330px;
+       /* overflow: hidden;*/
+        position: relative;
+    }
+    .ımg_1,.ımg_2,.ımg_3,.ımg_4,.ımg_5, .ımg_6,.ımg_6,.ımg_7,.ımg_8,.ımg_9,.ımg_10  {
+        position: absolute;
+        width: 880px;
+        height:330px;
+    }
+    .aw-slider > div > a > span {
+        position: absolute;
+        display: table;
+        background-color: black;
+        color: white;
+        right: 0;
+        bottom: 0;
+        padding: 5px 10px;
+    }
+    .ımg_1 {left: 0px;}
+    .ımg_2 {left: 350px;}
+    .ımg_3 {left: 700px;}
+     .ımg_4 {left: 1050px;}
+    .ımg_5 {left: 1400px;}
+    .ımg_6 {left: 1750px;}
+    .ımg_7 {left: 2100px;}
+    .ımg_8 {left: 2450px;}
+     .ımg_9 {left: 2800px;}
+    .ımg_10 {left: 3200px;}
+   
+
+    .aw-slider > div {
+        width:3200px ;
+        height: 330px;
+        left: 0px;
+        position: absolute;
+        -webkit-animation-duration: 20s;
+        -webkit-animation-iteration-count: infinite;
+        -webkit-animation-name: gecisler;
+        -moz-animation-duration: 20s;
+        -moz-animation-iteration-count: infinite;
+        -moz-animation-name: gecisler;
+        -ms-animation-duration: 20s;
+        -ms-animation-iteration-count: infinite;
+        -ms-animation-name: gecisler;
+        animation-duration: 20s;
+        animation-iteration-count: infinite;
+        animation-name: gecisler;
+    }
+
+        .aw-slider > div img {
+            opacity: 0.9;
+            filter: alpha(opacity=95);
+        }
+
+            .aw-slider > div img:hover {
+                opacity: 1;
+                filter: alpha(opacity=100);
+            }
+
+        .aw-slider > div:hover {
+            -webkit-animation-play-state: paused;
+          
+        }
+@-webkit-keyframes gecisler
+{
+  0% {left:0px;}
+  10% {left:0px;}
+  20% {left:-400px;}
+  30% {left:-800px;}
+  40% {left:-1200px;}
+  50% {left:-1600px;}
+  60% {left:-2000px;}
+  70% {left:-2400px;}
+  80% {left:-2800px;}
+  90% {left:-3200px;}
+}
+@-moz-keyframes gecisler
+{
+  0% {left:0px;}
+  10% {left:0px;}
+  20% {left:-400px;}
+  30% {left:-800px;}
+  40% {left:-1200px;}
+  50% {left:-1600px;}
+  60% {left:-2000px;}
+  70% {left:-2400px;}
+  80% {left:-2800px;}
+  90% {left:-3200px;}
+}
+@-ms-keyframes gecisler
+{
+  0% {left:0px;}
+  10% {left:0px;}
+  20% {left:-400px;}
+  30% {left:-800px;}
+  40% {left:-1200px;}
+  50% {left:-1600px;}
+  60% {left:-2000px;}
+  70% {left:-2400px;}
+  80% {left:-2800px;}
+  90% {left:-3200px;}
+}
+@keyframes gecisler
+{
+  0% {left:0px;}
+  10% {left:0px;}
+  20% {left:-400px;}
+  30% {left:-800px;}
+  40% {left:-1200px;}
+  50% {left:-1600px;}
+  60% {left:-2000px;}
+  70% {left:-2400px;}
+  80% {left:-2800px;}
+  90% {left:-3200px;}
+}
