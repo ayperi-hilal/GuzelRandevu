@@ -1,0 +1,46 @@
+﻿@model GuzelRandevu.Models.GuzellikMerkezi
+
+@{
+    ViewData["Title"] = "Düzenle";
+}
+
+<h5>Güzellik Merkezini Düzenle</h5>
+
+<h4></h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="merkezId" />
+            <div class="form-group">
+                <label asp-for="merkezResim" class="control-label"></label>
+                <input type="image" asp-for="merkezResim" class="form-control" />
+                <span asp-validation-for="merkezResim" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="merkezAdi" class="control-label"></label>
+                <input asp-for="merkezAdi" class="form-control" />
+                <span asp-validation-for="merkezAdi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="merkezAdresi" class="control-label"></label>
+                <input asp-for="merkezAdresi" class="form-control" />
+                <span asp-validation-for="merkezAdresi" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="merkezEmail" class="control-label"></label>
+                <input asp-for="merkezEmail" class="form-control" />
+                <span asp-validation-for="merkezEmail" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Kaydet" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="MerkezIndex">Güzellik Merkezlerine Geri Dön</a>
+</div>
+

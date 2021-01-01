@@ -1,0 +1,55 @@
+﻿@model IEnumerable<GuzelRandevu.Models.GuzellikMerkezi>
+
+@{
+    ViewData["Title"] = "Güzellik Merkezleri";
+}
+
+<h5>Güzellik Merkezleri</h5>
+
+    <p>
+        <a asp-controller="AdminPaneli" asp-action="MerkezCreate">Yeni Merkez Ekle</a>
+    </p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.merkezAdi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.merkezAdresi)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.merkezEmail)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    <img src="@Html.DisplayFor(modelItem => item.merkezResim)" />
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.merkezAdi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.merkezAdresi)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.merkezEmail)
+                </td>
+                <td>
+                    <a asp-action="MerkezEdit" asp-route-id="@item.merkezId"> Düzenle  |</a>
+                    <a asp-action="MerkezDelete" asp-route-id="@item.merkezId"> Sil |</a>
+                    <a asp-action="MerkezDetails" asp-route-id="@item.merkezId">Detaylar</a> |
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

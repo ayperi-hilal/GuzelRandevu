@@ -1,0 +1,78 @@
+﻿@model IEnumerable<GuzelRandevu.Models.Randevu>
+
+@{
+    ViewData["Title"] = "Randevular";
+}
+
+<h5>Randevular</h5>
+
+<p>
+    <a asp-action="RandevuCreate">Yeni Randevu Oluştur</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                Müşteri Adı Soyadı
+            </th>
+            <th>
+                Güzellik Merkezi
+            </th>
+            <th>
+                Değerlendirme
+            </th>
+            <th>
+                Puan
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.randevuSaati)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.uye.uyeAdi) @Html.DisplayFor(modelItem => item.uye.uyeSoyadi)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.guzellikMerkezi.merkezAdi)
+            </td>
+            @if (DateTime.Now.Date < item.randevuSaati)
+            {
+                <td>
+                    Gerçekleşmedi
+                </td>
+            }
+            else
+            {
+                <td>
+
+                    @Html.DisplayFor(modelItem => item.randevuDegerlendirmesi)
+                </td>
+            }
+            @if (DateTime.Now.Date < item.randevuSaati)
+            {
+                <td>
+                    Gerçekleşmedi
+                </td>
+            }
+            else
+            {
+                <td>
+                    @Html.DisplayFor(modelItem => item.randevuPuani)
+                </td>       
+            }
+            <td>
+                @Html.DisplayFor(modelItem => item.randevuSaati)
+            </td>
+            <td>
+                @Html.ActionLink("Düzenle", "RandevuEdit", new { merkezId = item.merkezId, uyeId = item.uyeId }) |
+                @Html.ActionLink("Detaylar", "RandevuDetails", new { merkezId = item.merkezId, uyeId = item.uyeId }) |
+                @Html.ActionLink("Sil", "RandevuDelete", new { merkezId = item.merkezId, uyeId = item.uyeId })
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,45 @@
+﻿@model GuzelRandevu.Models.GuzellikMerkezi
+
+@{
+    ViewData["Title"] = "Sil";
+}
+
+<h5>Güzellik Merkezini Sil</h5>
+
+<h3></h3>
+<div>
+    <h4></h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            
+        </dt>
+        <dd class="col-sm-10">
+            <img src="@Html.DisplayFor(model => model.merkezResim)" />
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.merkezAdi)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.merkezAdi)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.merkezAdresi)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.merkezAdresi)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.merkezEmail)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.merkezEmail)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="merkezId" />
+        <input type="submit" value="Sil" class="btn btn-danger" /> |
+        <a asp-action="MerkezIndex">Güzellik Merkezlerine Geri Dön</a>
+    </form>
+</div>
