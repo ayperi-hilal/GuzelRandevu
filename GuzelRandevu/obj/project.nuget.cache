@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "XWAkAnbE2vcz2zipiV258Jfa7+vRwq3HUaUQCG63x+XuJJ7TK5WBr7evQLMjbWy54B2HC+NQaZiMag74FUp3cg==",
+  "dgSpecHash": "7Q+nfS82gq7Ze9BHoB/OVmq0icA7I/j7h8Co22zZSy+wZIedEmxOf3uzstXoNQUu6cDODOX7WUZGplvydwXhQg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Yıldız\\source\\repos\\GuzelRandevu\\GuzelRandevu\\GuzelRandevu.csproj",
+  "projectFilePath": "C:\\Users\\Yıldız\\Desktop\\Yeni klasör (3)\\GuzelRandevu\\GuzelRandevu\\GuzelRandevu.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Yıldız\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\Yıldız\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\5.0.1\\microsoft.aspnetcore.cryptography.internal.5.0.1.nupkg.sha512",
