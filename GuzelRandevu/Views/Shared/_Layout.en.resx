@@ -120,4 +120,7 @@
   <data name="Kolaylıkla Güzellik Merkezlerinden Randevu Alın" xml:space="preserve">
     <value>Book Your Appointment with Your Beauty Center</value>
   </data>
+  <data name="Randevu" xml:space="preserve">
+    <value>Appointment</value>
+  </data>
 </root>
