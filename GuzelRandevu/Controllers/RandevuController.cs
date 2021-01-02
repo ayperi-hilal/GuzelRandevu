@@ -9,6 +9,8 @@ using GuzelRandevu.Data;
 using GuzelRandevu.Models;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
+using System.Configuration;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GuzelRandevu.Controllers
 {
@@ -16,28 +18,24 @@ namespace GuzelRandevu.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<Uye> _userManager;
-        public Uye uye;
+        
         public RandevuController(ApplicationDbContext context, UserManager<Uye> userManager)
         {
             _userManager = userManager;
             _context = context;
         }
-        public async Task<IActionResult> Index2(string uyeId)
+        [Authorize]
+        public async Task<ActionResult> Index()
         {
-            //var uye = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
-            var randevu = await _context.Randevu
-                .Include(r => r.guzellikMerkezi)
-                .Include(r => r.uye)
-                .FirstOrDefaultAsync(a => a.uyeId == uyeId);
-            return View(randevu);
+            var userId = this.User.FindFirstValue(ClaimTypes.NameIdentifier);
+            var liste = _context.Randevu.Include(r => r.guzellikMerkezi).Include(r => r.uye).Where(r => r.uye.Id == userId);
+            if (liste == null)
+            {
+                return NotFound();
+            }
+            return View(await liste.ToListAsync());
         }
-        // GET: Randevu
-        public async Task<IActionResult> Index()
-        {
-            var applicationDbContext = _context.Randevu.Include(r => r.guzellikMerkezi).Include(r => r.uye);
-            return View(await applicationDbContext.ToListAsync());
-        }
-
+        [AllowAnonymous]
         // GET: Randevu/Details/5
         public async Task<IActionResult> Details(string merkezId,string uyeId)
         {
@@ -54,10 +52,10 @@ namespace GuzelRandevu.Controllers
             {
                 return NotFound();
             }
-
+            ViewBag.gunu = randevu.randevuSaati;
             return View(randevu);
         }
-
+        [Authorize]
         // GET: Randevu/Create
         public IActionResult Create()
         {
@@ -88,7 +86,7 @@ namespace GuzelRandevu.Controllers
             ViewData["uyeId"] = new SelectList(_context.Users, "Id", "Id", randevu.uyeId);
             return View(randevu);
         }
-
+        [Authorize]
         // GET: Randevu/Edit/5
         public async Task<IActionResult> Edit(string merkezId,string uyeId)
         {
@@ -102,6 +100,7 @@ namespace GuzelRandevu.Controllers
             {
                 return NotFound();
             }
+            ViewBag.gun = randevu.randevuSaati;
             ViewData["merkezId"] = new SelectList(_context.GuzellikMerkezi, "merkezId", "merkezId", randevu.merkezId);
             ViewData["uyeId"] = new SelectList(_context.Users, "Id", "Id", randevu.uyeId);
             return View(randevu);
@@ -143,7 +142,7 @@ namespace GuzelRandevu.Controllers
             ViewData["uyeId"] = new SelectList(_context.Users, "Id", "Id", randevu.uyeId);
             return View(randevu);
         }
-
+        [Authorize]
         // GET: Randevu/Delete/5
         public async Task<IActionResult> Delete(string merkezId,string uyeId)
         {
