@@ -9,59 +9,27 @@
 @if (User.IsInRole("Admin"))
 {
     <p>
-        <a asp-controller="AdminPaneli" asp-action="Create">Yeni Merkez Ekle</a>
+        <a asp-controller="AdminPaneli" asp-action="MerkezCreate">Yeni Merkez Ekle</a>
     </p>
 }
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.merkezAdi)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.merkezAdresi)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.merkezEmail)
-            </th>
-
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
+    <div class="card-columns">
         @foreach (var item in Model)
         {
-        <tr>
-            <td>
-                <img src="@Html.DisplayFor(modelItem => item.merkezResim)" />
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.merkezAdi)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.merkezAdresi)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.merkezEmail)
-            </td>
-            <td>
-                @if (User.IsInRole("Admin"))
-                {
-                    <a asp-controller="AdminPaneli" asp-action="MerkezEdit" asp-route-id="@item.merkezId"> Düzenle  |</a>
-                    <a asp-controller="AdminPaneli" asp-action="MerkezDelete" asp-route-id="@item.merkezId">Sil |</a>
-                    <a asp-controller="AdminPaneli" asp-action="MerkezDetails" asp-route-id="@item.merkezId">Detaylar |</a>
-                    <a asp-controller="AdminPaneli" asp-action="RandevuCreate" >Randevu Oluştur</a>
-                }
-                else
-                {
-                    <a asp-controller="Randevu" asp-action="Create">Randevu Al |</a>
-                    <a asp-action="Details" asp-route-id="@item.merkezId">Detaylar</a>
-                }
-            </td>
-        </tr>
+            <div class="card">
+                <div class="card-img">
+                    <img id="resim" src="@Html.DisplayFor(modelItem => item.merkezResim)" />
+                </div>
+                <div class="card-body" style="text-align: center;">
+                    @if (User.IsInRole("Müşteri"))
+                    {
+                        <a asp-action="Details" asp-route-id="@item.merkezId" id="link"><h5 class="card-title">@Html.DisplayFor(modelItem => item.merkezAdi)</h5></a>
+                    }
+                    else
+                    {
+                        <a id="link" class="linki" asp-controller="AdminPaneli" asp-action="MerkezDetails" asp-route-id="@item.merkezId"><h5 class="card-title">@Html.DisplayFor(modelItem => item.merkezAdi)</h5></a>
+                    }
+                </div>
+            </div>
         }
-    </tbody>
-</table>
+    </div>
+
