@@ -19,10 +19,4 @@
     <Folder Include="Resources\" />
   </ItemGroup>
 
-  <ItemGroup>
-    <EmbeddedResource Update="Views\Shared\_Layout.en.resx">
-      <Generator>PublicResXFileCodeGenerator</Generator>
-    </EmbeddedResource>
-  </ItemGroup>
-
 </Project>

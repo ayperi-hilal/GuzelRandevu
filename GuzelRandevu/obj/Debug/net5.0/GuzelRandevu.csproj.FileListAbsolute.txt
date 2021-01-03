@@ -412,7 +412,3 @@ C:\Users\Yıldız\Desktop\Yeni klasör (3)\GuzelRandevu\GuzelRandevu\bin\Debug\n
 C:\Users\Yıldız\Desktop\Yeni klasör (3)\GuzelRandevu\GuzelRandevu\obj\Debug\net5.0\GuzelRandevu.Views.pdb
 C:\Users\Yıldız\Desktop\Yeni klasör (3)\GuzelRandevu\GuzelRandevu\obj\Debug\net5.0\GuzelRandevu.csproj.CopyComplete
 C:\Users\Yıldız\Desktop\Yeni klasör (3)\GuzelRandevu\GuzelRandevu\obj\Debug\net5.0\GuzelRandevu.genruntimeconfig.cache
-C:\Users\Yıldız\Desktop\Yeni klasör (3)\GuzelRandevu\GuzelRandevu\bin\Debug\net5.0\en\GuzelRandevu.resources.dll
-C:\Users\Yıldız\Desktop\Yeni klasör (3)\GuzelRandevu\GuzelRandevu\obj\Debug\net5.0\GuzelRandevu.Views.Shared._Layout.en.resources
-C:\Users\Yıldız\Desktop\Yeni klasör (3)\GuzelRandevu\GuzelRandevu\obj\Debug\net5.0\GuzelRandevu.csproj.GenerateResource.cache
-C:\Users\Yıldız\Desktop\Yeni klasör (3)\GuzelRandevu\GuzelRandevu\obj\Debug\net5.0\en\GuzelRandevu.resources.dll

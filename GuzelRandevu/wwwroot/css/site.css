@@ -224,7 +224,7 @@ body {
 #link {
     text-decoration:none;
     display:block;
-    color:coral;
+    color:brown;
 }
 #admin{
     width:100%;
@@ -233,3 +233,43 @@ body {
 body {
     background-color:beige;
 }
+.hover-overlay-container {
+    position: relative;
+    /*width: 300px;*/
+}
+
+    .hover-overlay-container:hover .overlay-image {
+        opacity: 0.3;
+    }
+
+    .hover-overlay-container:hover .overlay-btn-container {
+        opacity: 1;
+    }
+
+    .hover-overlay-container .overlay-image {
+        display: block;
+        /*width: 100%;
+        height: auto;*/
+        opacity: 0.5;
+        transition: .5s ease;
+        backface-visibility: hidden;
+    }
+
+    .hover-overlay-container .overlay-btn-container {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        opacity: 0;
+        transition: .5s ease;
+        text-align: center;
+        transform: translate(-50%, -50%);
+    }
+
+        .hover-overlay-container .overlay-btn-container .overlay-btn {
+            font-size: 20px;
+            color: brown;
+            background-color: beige;
+            font-family: 'Nunito', sans-serif;
+            padding: 10px 16px;
+            text-decoration: none;
+        }
