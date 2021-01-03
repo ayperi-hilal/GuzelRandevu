@@ -1,35 +1,41 @@
-﻿@model GuzelRandevu.Models.GuzellikMerkezi
-
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer _localizer
 @{
-    ViewData["Title"] = "Güzellik Merkezi Detayları";
+    ViewData["Title1"] = _localizer["Güzellik Merkezi Adı"];
+    ViewData["Title2"] = _localizer["Adres"];
+    ViewData["Title3"] = _localizer["Email adresi"];
+    ViewData["Title"] = _localizer["Güzellik Merkezi Detayları"];
+    ViewData["Title4"] = _localizer["Güzellik Merkezi"];
 }
+@model GuzelRandevu.Models.GuzellikMerkezi
 
-<h5>Güzellik Merkezi Detayları</h5>
+
+<h5>@ViewData["Title"]</h5>
 
 <div>
-    <h4>GuzellikMerkezi</h4>
+    <h4>@ViewData["Title4"]</h4>
     <hr />
     <dl class="row">
         <dt class="col-sm-2">
-            
+
         </dt>
         <dd class="col-sm-10">
             <img src="@Html.DisplayFor(model => model.merkezResim)" />
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.merkezAdi)
+            @ViewData["Title1"]
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.merkezAdi)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.merkezAdresi)
+            @ViewData["Title3"]
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.merkezAdresi)
         </dd>
         <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.merkezEmail)
+            @ViewData["Title4"]
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.merkezEmail)
@@ -40,7 +46,7 @@
     @if (User.IsInRole("Admin"))
     {
         <a asp-controller="AdminPaneli" asp-action="MerkezEdit" asp-route-id="@Model.merkezId">Düzenle |</a>
-        <a asp-controller="AdminPaneli" asp-action="RandevuCreate" >Randevu Oluştur |</a>
+        <a asp-controller="AdminPaneli" asp-action="RandevuCreate">Randevu Oluştur |</a>
         <a asp-controller="AdminPaneli" asp-action="MerkezIndex">Güzellik Merkezlerine Geri Dön</a>
     }
     else

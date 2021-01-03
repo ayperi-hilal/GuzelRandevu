@@ -1,10 +1,19 @@
-﻿@model GuzelRandevu.Models.GuzellikMerkezi
-
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer _localizer
 @{
-    ViewData["Title"] = "Ekle";
+    ViewData["Title"] = _localizer["Güzellik Merkezi Ekle"];
+    ViewData["Title9"] = _localizer["Güzellik Merkezi Resmi"];
+    ViewData["Title10"] = _localizer["Güzellik Merkezi ID"];
+    ViewData["Title2"] = _localizer["Güzellik Merkezi Adı"];
+    ViewData["Title3"] = _localizer["Adresi"];
+    ViewData["Title4"] = _localizer["Email Adresi"];
+    ViewData["Title6"] = _localizer["Ekle"];
+    ViewData["Title8"] = _localizer["Güzellik Merkezlerine Geri Dön"];
 }
+@model GuzelRandevu.Models.GuzellikMerkezi
 
-<h5>Güzellik Merkezi Ekle</h5>
+
+<h5>@ViewData["Title"]</h5>
 
 <h4></h4>
 <hr />
@@ -13,38 +22,38 @@
         <form asp-action="MerkezCreate">
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <div class="form-group">
-                <label class="control-label">Güzellik Merkezi Resmi</label>
+                <label class="control-label">@ViewData["Title9"]</label>
                 <input type="url" asp-for="merkezResim" class="form-control" />
                 <span asp-validation-for="merkezResim" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label class="control-label"> Güzellik Merkezi ID</label>
+                <label class="control-label"> @ViewData["Title10"] </label>
                 <input asp-for="merkezId" class="form-control" />
                 <span asp-validation-for="merkezId" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="merkezAdi" class="control-label"></label>
+                <label class="control-label"> @ViewData["Title2"]</label>
                 <input asp-for="merkezAdi" class="form-control" />
                 <span asp-validation-for="merkezAdi" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="merkezAdresi" class="control-label"></label>
+                <label class="control-label">@ViewData["Title3"]</label>
                 <input asp-for="merkezAdresi" class="form-control" />
                 <span asp-validation-for="merkezAdresi" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <label asp-for="merkezEmail" class="control-label"></label>
+                <label class="control-label">@ViewData["Title4"]</label>
                 <input asp-for="merkezEmail" class="form-control" />
                 <span asp-validation-for="merkezEmail" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <input type="submit" value="Ekle" class="btn btn-primary" />
+                <input type="submit" value="@ViewData["Title6"]" class="btn btn-primary" />
             </div>
         </form>
     </div>
 </div>
 
 <div>
-    <a asp-action="MerkezIndex">Güzellik Merkezlerine Geri Dön</a>
+    <a asp-action="MerkezIndex">@ViewData["Title8"]</a>
 </div>
 

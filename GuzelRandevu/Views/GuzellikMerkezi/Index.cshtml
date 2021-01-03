@@ -1,71 +1,49 @@
-﻿@model IEnumerable<GuzelRandevu.Models.GuzellikMerkezi>
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer _localizer
+@{
+    ViewData["Title2"] = _localizer["Yeni Merkez Ekle"];
+    ViewData["Title3"] = _localizer["Detaylar"];
+    ViewData["Title4"] = _localizer["Güzellik Merkezleri"];
+}
+
+@model IEnumerable<GuzelRandevu.Models.GuzellikMerkezi>
 
 @{
     ViewData["Title"] = "Güzellik Merkezleri";
 }
 
-<h5>Güzellik Merkezleri</h5>
+<h5>@ViewData["Title4"]</h5>
+<br />
 
 @if (User.IsInRole("Admin"))
 {
     <p>
-        <a asp-controller="AdminPaneli" asp-action="MerkezCreate">Yeni Merkez Ekle</a>
+        <a asp-controller="AdminPaneli" asp-action="MerkezCreate">@ViewData["Title2"]</a>
     </p>
 }
-@*<body id="rnd">
-    <table class="table">
-
-        <div class="card-columns">
-            @foreach (var item in Model)
-            {
-
-
-
-                <div class="card">
-                    <div class="card-img">
-                        <div class="hover-overlay-container">
-                            <img id="resim" src="@Html.DisplayFor(modelItem => item.merkezResim)" />
-                            <div class="overlay-btn-container">
-                                <a class="overlay-btn" asp-action="Details" asp-route-id="@item.merkezId">Detaylar</a>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        <div class="overlay">
-                            <a asp-action="Details" asp-route-id="@item.merkezId"><h5 class="card-title"> @Html.DisplayFor(modelItem => item.merkezAdi)</h5></a>
-                        </div>
-
+<div class="card-columns">
+    @foreach (var item in Model)
+    {
+        <div class="card" style="background-color: aliceblue">
+            <div class="card-img">
+                <div class="hover-overlay-container">
+                    <img id="resim" src="@Html.DisplayFor(modelItem => item.merkezResim)" />
+                    <div class="overlay-btn-container">
+                        <a class="overlay-btn" asp-action="Details" asp-route-id="@item.merkezId">@ViewData["Title3"]</a>
                     </div>
                 </div>
-            }
+            </div>
+            <div class="card-body" style="text-align: center;">
+                @if (User.IsInRole("Müşteri"))
+                {
+                    <a asp-action="Details" asp-route-id="@item.merkezId" id="link"><h5 class="card-title">@Html.DisplayFor(modelItem => item.merkezAdi)</h5></a>
+                }
+                else
+                {
+                    <a id="link" class="linki" asp-controller="AdminPaneli" asp-action="MerkezDetails" asp-route-id="@item.merkezId"><h5 class="card-title">@Html.DisplayFor(modelItem => item.merkezAdi)</h5></a>
+                }
+            </div>
         </div>
-
-
-    </table>
-</body>*@
-    <div class="card-columns">
-        @foreach (var item in Model)
-        {
-            <div class="card" style="background-color: aliceblue">
-                <div class="card-img">
-                    <div class="hover-overlay-container">
-                        <img id="resim" src="@Html.DisplayFor(modelItem => item.merkezResim)" />
-                        <div class="overlay-btn-container">
-                            <a class="overlay-btn" asp-action="Details" asp-route-id="@item.merkezId">Detaylar</a>
-                        </div>
-                    </div>
-                    </div>
-                    <div class="card-body" style="text-align: center;">
-                        @if (User.IsInRole("Müşteri"))
-                        {
-                            <a asp-action="Details" asp-route-id="@item.merkezId" id="link"><h5 class="card-title">@Html.DisplayFor(modelItem => item.merkezAdi)</h5></a>
-                        }
-                        else
-                        {
-                            <a id="link" class="linki" asp-controller="AdminPaneli" asp-action="MerkezDetails" asp-route-id="@item.merkezId"><h5 class="card-title">@Html.DisplayFor(modelItem => item.merkezAdi)</h5></a>
-                        }
-                    </div>
-                </div>
-        }
-    </div>
+    }
+</div>
 

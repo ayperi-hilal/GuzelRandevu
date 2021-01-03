@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Localization;
 
 namespace GuzelRandevu.Controllers
 { [Authorize(Roles ="Admin")]
@@ -18,8 +19,10 @@ namespace GuzelRandevu.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly ILogger<AdminPaneliController> _logger;
-        public AdminPaneliController(ApplicationDbContext context,ILogger<AdminPaneliController> logger)
+        private readonly IStringLocalizer<AdminPaneliController> _localizer;
+        public AdminPaneliController(ApplicationDbContext context,ILogger<AdminPaneliController> logger, IStringLocalizer<AdminPaneliController> localizer)
         {
+            _localizer = localizer;
             _logger = logger;
             _context = context;
         }
@@ -181,10 +184,25 @@ namespace GuzelRandevu.Controllers
         }
     public async Task<IActionResult> MerkezIndex()
         {
+            ViewData["Title"] = _localizer["Güzellik Merkezleri"];
+            ViewData["Title2"] = _localizer["Güzellik Merkezi Adı"];
+            ViewData["Title3"] = _localizer["Adresi"];
+            ViewData["Title4"] = _localizer["Email Adresi"];
+            ViewData["Title5"] = _localizer["Merkez Ekle"];
+            ViewData["Title3"] = _localizer["Düzenle"];
+            ViewData["Title4"] = _localizer["Sil"];
+            ViewData["Title5"] = _localizer["Detaylar"];
             return View(await _context.GuzellikMerkezi.ToListAsync());
         }
         public async Task<IActionResult> MerkezDetails(string id)
         {
+            ViewData["Title"] = _localizer["Güzellik Merkezlerinin Detaylarını Gör"];
+            ViewData["Title2"] = _localizer["Güzellik Merkezi Adı"];
+            ViewData["Title3"] = _localizer["Adresi"];
+            ViewData["Title4"] = _localizer["Email Adresi"];
+            ViewData["Title6"] = _localizer["Düzenle"];
+            ViewData["Title7"] = _localizer["Randevu Al"];
+            ViewData["Title8"] = _localizer["Güzellik Merkezlerine Geri Dön"];
             if (id == null)
             {
                 return NotFound();
@@ -213,6 +231,14 @@ namespace GuzelRandevu.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> MerkezCreate([Bind("merkezId,merkezAdi,merkezAdresi,merkezEmail,merkezResim")] GuzellikMerkezi guzellikMerkezi)
         {
+            ViewData["Title"] = _localizer["Güzellik Merkezi Ekle"];
+            ViewData["Title9"] = _localizer["Güzellik Merkezi Resmi"];
+            ViewData["Title10"] = _localizer["Güzellik Merkezi ID"];
+            ViewData["Title2"] = _localizer["Güzellik Merkezi Adı"];
+            ViewData["Title3"] = _localizer["Adresi"];
+            ViewData["Title4"] = _localizer["Email Adresi"];
+            ViewData["Title6"] = _localizer["Ekle"];
+            ViewData["Title8"] = _localizer["Güzellik Merkezlerine Geri Dön"];
             if (ModelState.IsValid)
             {
                 _context.Add(guzellikMerkezi);
@@ -225,6 +251,13 @@ namespace GuzelRandevu.Controllers
         // GET: GuzellikMerkezi/Edit/5
         public async Task<IActionResult> MerkezEdit(string id)
         {
+            ViewData["Title"] = _localizer["Güzellik Merkezini Düzenle"];
+            ViewData["Title2"] = _localizer["Güzellik Merkezi Adı"];
+            ViewData["Title3"] = _localizer["Adresi"];
+            ViewData["Title4"] = _localizer["Email Adresi"];
+            ViewData["Title5"] = _localizer["Kaydet"];
+            ViewData["Title6"] = _localizer["Güzellik Merkezlerine Geri Dön"];
+            ViewData["Title7"] = _localizer["Merkez Resmi"];
             if (id == null)
             {
                 return NotFound();
@@ -276,6 +309,12 @@ namespace GuzelRandevu.Controllers
         // GET: GuzellikMerkezi/Delete/5
         public async Task<IActionResult> MerkezDelete(string id)
         {
+            ViewData["Title"] = _localizer["Güzellik Merkezini Sil"];
+            ViewData["Title2"] = _localizer["Güzellik Merkezi Adı"];
+            ViewData["Title3"] = _localizer["Adresi"];
+            ViewData["Title4"] = _localizer["Email Adresi"];
+            ViewData["Title6"] = _localizer["Sil"];
+            ViewData["Title8"] = _localizer["Güzellik Merkezlerine Geri Dön"];
             if (id == null)
             {
                 return NotFound();

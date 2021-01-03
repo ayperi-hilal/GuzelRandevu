@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Localization;
 
 namespace GuzelRandevu.Controllers
 {
@@ -22,8 +23,10 @@ namespace GuzelRandevu.Controllers
         private readonly ApplicationDbContext _context;
         private readonly UserManager<Uye> _userManager;
         private readonly ILogger<RandevuController> _logger;
-        public RandevuController(ApplicationDbContext context, UserManager<Uye> userManager, ILogger<RandevuController> logger)
+        private readonly IStringLocalizer<RandevuController> _localizer;
+        public RandevuController(ApplicationDbContext context, UserManager<Uye> userManager, ILogger<RandevuController> logger, IStringLocalizer<RandevuController> localizer)
         {
+            _localizer = localizer;
             _logger = logger;
             _userManager = userManager;
             _context = context;

@@ -10,6 +10,7 @@ using GuzelRandevu.Models;
 using Microsoft.Extensions.Logging;
 using Microsoft.AspNetCore.Localization;
 using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Localization;
 
 namespace GuzelRandevu.Controllers
 {
@@ -17,9 +18,11 @@ namespace GuzelRandevu.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly ILogger<GuzellikMerkeziController> _logger;
-        public GuzellikMerkeziController(ApplicationDbContext context,ILogger<GuzellikMerkeziController> logger)
+        private readonly IStringLocalizer<GuzellikMerkeziController> _localizer;
+        public GuzellikMerkeziController(ApplicationDbContext context, ILogger<GuzellikMerkeziController> logger, IStringLocalizer<GuzellikMerkeziController> localizer)
         {
             _logger = logger;
+            _localizer = localizer;
             _context = context;
         }
         [HttpPost]
@@ -36,12 +39,20 @@ namespace GuzelRandevu.Controllers
         // GET: GuzellikMerkezi
         public async Task<IActionResult> Index()
         {
+            ViewData["Title2"] = _localizer["Yeni Merkez Ekle"];
+            ViewData["Title3"] = _localizer["Detaylar"];
+            ViewData["Title4"] = _localizer["Güzellik Merkezleri"];
             return View(await _context.GuzellikMerkezi.ToListAsync());
         }
 
         // GET: GuzellikMerkezi/Details/5
         public async Task<IActionResult> Details(string id)
         {
+            ViewData["Title"] = _localizer["Güzellik Merkezi Detayları"];
+            ViewData["Title1"] = _localizer["Güzellik Merkezi Adı"];
+            ViewData["Title2"] = _localizer["Adres"];
+            ViewData["Title3"] = _localizer["Email adresi"];
+            ViewData["Title4"] = _localizer["Güzellik Merkezi"];
             if (id == null)
             {
                 return NotFound();

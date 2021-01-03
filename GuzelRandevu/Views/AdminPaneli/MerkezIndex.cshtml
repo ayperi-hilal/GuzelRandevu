@@ -1,14 +1,22 @@
-﻿@model IEnumerable<GuzelRandevu.Models.GuzellikMerkezi>
-
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer _localizer
 @{
-    ViewData["Title"] = "Güzellik Merkezleri";
+    ViewData["Title"] = _localizer["Güzellik Merkezleri"];
+    ViewData["Title2"] = _localizer["Güzellik Merkezi Adı"];
+    ViewData["Title3"] = _localizer["Adresi"];
+    ViewData["Title4"] = _localizer["Email Adresi"];
+    ViewData["Title5"] = _localizer["Merkez Ekle"];
+    ViewData["Title6"] = _localizer["Düzenle"];
+    ViewData["Title7"] = _localizer["Sil"];
+    ViewData["Title8"] = _localizer["Detaylar"];
 }
+@model IEnumerable<GuzelRandevu.Models.GuzellikMerkezi>
 
-<h5>Güzellik Merkezleri</h5>
+<h5>@ViewData["Title"]</h5>
 
-    <p>
-        <a asp-controller="AdminPaneli" asp-action="MerkezCreate">Yeni Merkez Ekle</a>
-    </p>
+<p>
+    <a asp-controller="AdminPaneli" asp-action="MerkezCreate">@ViewData["Title5"]</a>
+</p>
 
 <table class="table">
     <thead>
@@ -17,13 +25,13 @@
 
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.merkezAdi)
+                @ViewData["Title2"]
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.merkezAdresi)
+                @ViewData["Title3"]
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.merkezEmail)
+                @ViewData["Title4"]
             </th>
             <th></th>
         </tr>
@@ -33,7 +41,7 @@
         {
             <tr>
                 <td>
-                    <img src="@Html.DisplayFor(modelItem => item.merkezResim)"  id="admin"/>
+                    <img src="@Html.DisplayFor(modelItem => item.merkezResim)" id="admin" />
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.merkezAdi)
@@ -45,9 +53,9 @@
                     @Html.DisplayFor(modelItem => item.merkezEmail)
                 </td>
                 <td>
-                    <a asp-action="MerkezEdit" asp-route-id="@item.merkezId"> Düzenle  |</a>
-                    <a asp-action="MerkezDelete" asp-route-id="@item.merkezId"> Sil |</a>
-                    <a asp-action="MerkezDetails" asp-route-id="@item.merkezId">Detaylar</a> |
+                    <a asp-action="MerkezEdit" asp-route-id="@item.merkezId"> @ViewData["Title6"]  |</a>
+                    <a asp-action="MerkezDelete" asp-route-id="@item.merkezId">@ViewData["Title7"] |</a>
+                    <a asp-action="MerkezDetails" asp-route-id="@item.merkezId">@ViewData["Title8"]</a> |
                 </td>
             </tr>
         }
