@@ -8,17 +8,32 @@ using Microsoft.EntityFrameworkCore;
 using GuzelRandevu.Data;
 using GuzelRandevu.Models;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Http;
 
 namespace GuzelRandevu.Controllers
 { [Authorize(Roles ="Admin")]
     public class AdminPaneliController : Controller
     {
         private readonly ApplicationDbContext _context;
-        public AdminPaneliController(ApplicationDbContext context)
+        private readonly ILogger<AdminPaneliController> _logger;
+        public AdminPaneliController(ApplicationDbContext context,ILogger<AdminPaneliController> logger)
         {
+            _logger = logger;
             _context = context;
         }
+        [HttpPost]
+        public IActionResult SetLanguage(string culture, string returnUrl)
+        {
+            Response.Cookies.Append(
+                CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddDays(1) }
+            );
 
+            return LocalRedirect(returnUrl);
+        }
         // GET: AdminPaneli
         public async Task<IActionResult> RandevuIndex()
         {

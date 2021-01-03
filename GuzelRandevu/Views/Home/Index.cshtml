@@ -1,4 +1,10 @@
-﻿@{ ViewData["Title"] = "Güzel Randevu"; }
+﻿@using Microsoft.AspNetCore.Mvc.Localization
+@inject IViewLocalizer _localizer
+@{
+    ViewData["Title2"] = _localizer["Güzel Randevuya Hoşgeldiniz"];
+    ViewData["Title3"] = _localizer["İstediğiniz Güzellik Merkezleri'nden kolaylıkla randevunuzu oluşturmanız için sizinleyiz!"];
+}
+@{ ViewData["Title"] = "Güzel Randevu"; }
 
 <html>
 
@@ -6,11 +12,11 @@
     <link rel="stylesheet" href="~/css/site.css">
 </head>
 
-<body >
+<body>
     <div>
         <center>
-            <h1 class="display-4">Güzel Randevuya Hoşgeldiniz</h1>
-            <p>İstediğiniz Güzellik Merkezleri'nden kolaylıkla randevunuzu oluşturmanız için sizinleyiz!</p>
+            <h1 class="display-4">@ViewData["Title2"]</h1>
+            <p>@ViewData["Title3"]</p>
         </center>
 
     </div><br />

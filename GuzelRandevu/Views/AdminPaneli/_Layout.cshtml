@@ -52,8 +52,19 @@
     </div>
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2020 - GuzelRandevu - All Rights Reserved
+            @{
+                string year = DateTime.Now.Year.ToString();
+            }
+            <div class="row">
+                <div class="col-sm-6">
+                    <p>&copy; @year - GuzelRandevu - All Rights Reserved</p>
+                </div>
+                <div class="col-sm-6 text-right">
+                    @await Html.PartialAsync("_PartialView")
+                </div>
+            </div>
         </div>
+
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

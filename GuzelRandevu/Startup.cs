@@ -32,23 +32,29 @@ namespace GuzelRandevu
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc()
-                .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix);
-            services.AddControllersWithViews();
-            services.Configure<RequestLocalizationOptions>(options =>
-            {
-                var supportedCultures = new[]
-                {
-                    new CultureInfo("en-US"),
-                    new CultureInfo("tr")
-                };
-                options.DefaultRequestCulture = new RequestCulture(culture: "tr", uiCulture: "tr");
-                options.SupportedCultures = supportedCultures;
-                options.SupportedUICultures = supportedCultures;
+            services.AddLocalization(opts => {
+                opts.ResourcesPath = "Resources";
             });
-            
+
+            services.AddMvc()
+                    .AddViewLocalization(opts => { opts.ResourcesPath = "Resources"; })
+                    .AddViewLocalization(LanguageViewLocationExpanderFormat.Suffix)
+                    .AddDataAnnotationsLocalization();
+                    services.AddControllersWithViews();
 
 
+            services.Configure<RequestLocalizationOptions>(opts => {
+                var supportedCultures = new List<CultureInfo> {
+                    new CultureInfo("en-US"),
+                    new CultureInfo("tr"), 
+                  };
+
+                opts.DefaultRequestCulture = new RequestCulture("tr");
+                // Formatting numbers, dates, etc.
+                opts.SupportedCultures = supportedCultures;
+                // UI strings that we have localized.
+                opts.SupportedUICultures = supportedCultures;
+            });
 
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(
@@ -90,8 +96,11 @@ namespace GuzelRandevu
 
             app.UseRouting();
 
-            var guzelRandevuOptions = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
-            app.UseRequestLocalization(guzelRandevuOptions.Value);
+            var options = app.ApplicationServices.GetService<IOptions<RequestLocalizationOptions>>();
+            app.UseRequestLocalization(options.Value);
+
+            app.UseCookiePolicy();
+
             app.UseAuthentication();
             app.UseAuthorization();
 

@@ -313,6 +313,11 @@
         "runtime": {
           "GuzelRandevu.dll": {}
         },
+        "resources": {
+          "en-US/GuzelRandevu.resources.dll": {
+            "locale": "en-US"
+          }
+        },
         "compile": {
           "GuzelRandevu.dll": {}
         }

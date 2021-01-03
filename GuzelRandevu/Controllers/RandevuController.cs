@@ -11,6 +11,9 @@ using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using System.Configuration;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Localization;
+using Microsoft.AspNetCore.Http;
+using Microsoft.Extensions.Logging;
 
 namespace GuzelRandevu.Controllers
 {
@@ -18,11 +21,23 @@ namespace GuzelRandevu.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly UserManager<Uye> _userManager;
-        
-        public RandevuController(ApplicationDbContext context, UserManager<Uye> userManager)
+        private readonly ILogger<RandevuController> _logger;
+        public RandevuController(ApplicationDbContext context, UserManager<Uye> userManager, ILogger<RandevuController> logger)
         {
+            _logger = logger;
             _userManager = userManager;
             _context = context;
+        }
+        [HttpPost]
+        public IActionResult SetLanguage(string culture, string returnUrl)
+        {
+            Response.Cookies.Append(
+                CookieRequestCultureProvider.DefaultCookieName,
+                CookieRequestCultureProvider.MakeCookieValue(new RequestCulture(culture)),
+                new CookieOptions { Expires = DateTimeOffset.UtcNow.AddDays(1) }
+            );
+
+            return LocalRedirect(returnUrl);
         }
         [Authorize]
         public async Task<ActionResult> Index()
