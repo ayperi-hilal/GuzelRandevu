@@ -117,10 +117,19 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Güzel Randevuya Hoşgeldiniz" xml:space="preserve">
-    <value>Welcome To Beauty Appointment</value>
+  <data name="Gerçekleşmedi" xml:space="preserve">
+    <value>Didn't happen</value>
   </data>
-  <data name="İstediğiniz Güzellik Merkezleri'nden kolaylıkla randevunuzu oluşturmanız için sizinleyiz!" xml:space="preserve">
-    <value>We are with you to easily create your appointment at the Beauty Centers you want!</value>
+  <data name="Güzellik Merkezi" xml:space="preserve">
+    <value>Beauty Center</value>
+  </data>
+  <data name="Randevu Listesi" xml:space="preserve">
+    <value>Appointment List</value>
+  </data>
+  <data name="Yeni Oluştur" xml:space="preserve">
+    <value>Create New</value>
+  </data>
+  <data name="Üye Adı Soyadı" xml:space="preserve">
+    <value>Member name surname</value>
   </data>
 </root>
